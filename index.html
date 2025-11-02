@@ -190,30 +190,26 @@
     </style>
 </head>
 <body>
-
 <header>
     <h1>Станислав и Виктория</h1>
     <p>30 августа 2026 года</p>
     <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Подробнее</button>
 </header>
-
 <section id="about">
     <h2>Дорогие друзья!</h2>
     <p>С любовью и радостью приглашаем вас отпраздновать с нами начало нашей семейной жизни. Этот день станет особенным,
         и нам будет очень приятно разделить его с вами.</p>
     <div id="countdown"></div>
 </section>
-
 <section id="place">
     <h2>Место проведения</h2>
     <p>Усадьба <b>Royal Hall</b><br>Логойский р-н, д. Чуденичи, ул. Лесная, д. 2А</p>
     <iframe src="https://maps.google.com/maps?q=54.138,27.792&z=15&output=embed"></iframe>
 </section>
-
 <section id="rsvp">
     <h2>Подтверждение участия</h2>
     <form id="rsvpForm"
-          action="https://script.google.com/macros/s/AKfycbziFBBUeJFux45i3JS-YOp-rugKPouTnNmSLqF8LxMmA4yvpsx5PSqoo_sKW8V7no06rg/exec"
+          action="https://script.google.com/macros/s/AKfycbzYHA4Ve5GsN1Gyk64Uu-5WIQ8nbfUaANXB2tJB6Wtm6dTKpPVVZJ65pqetI80q1WngJA/exec"
           method="POST">
         <input type="text" name="Имя" placeholder="Ваше имя" required>
         <input type="text" name="Фамилия" placeholder="Ваша фамилия" required>
@@ -228,12 +224,11 @@
     <p id="formMessage"></p>
 </section>
 
-
 <footer>
     С любовью, Станислав и Виктория ❤️
 </footer>
-
 <script>
+    // Таймер обратного отсчёта
     const countdown = document.getElementById('countdown');
     const targetDate = new Date('2026-08-30T00:00:00');
 
@@ -249,11 +244,11 @@
         const mins = Math.floor((diff / (1000 * 60)) % 60);
         const secs = Math.floor((diff / 1000) % 60);
         countdown.innerHTML = `
-        <div class="time-box"><span>${days}</span>дней</div>
-        <div class="time-box"><span>${hours}</span>часов</div>
-        <div class="time-box"><span>${mins}</span>минут</div>
-        <div class="time-box"><span>${secs}</span>секунд</div>
-      `;
+      <div class="time-box"><span>${days}</span>дней</div>
+      <div class="time-box"><span>${hours}</span>часов</div>
+      <div class="time-box"><span>${mins}</span>минут</div>
+      <div class="time-box"><span>${secs}</span>секунд</div>
+    `;
     }
 
     setInterval(updateCountdown, 1000);
@@ -267,7 +262,7 @@
     }, {threshold: 0.2});
     sections.forEach(section => observer.observe(section));
 
-    // Форма RSVP
+    // Обработка формы RSVP
     document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const formData = new FormData(this);
@@ -278,10 +273,13 @@
                 message.style.color = 'green';
                 message.textContent = 'Спасибо! Ваш ответ отправлен ❤️';
                 this.reset();
-            } else throw new Error('Ошибка');
+            } else {
+                throw new Error('Ошибка при отправке');
+            }
         } catch (err) {
             message.style.color = 'red';
             message.textContent = 'Произошла ошибка. Попробуйте позже.';
+            console.error(err);
         }
     });
 </script>
