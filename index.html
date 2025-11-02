@@ -28,7 +28,12 @@
             right: 0;
             bottom: 0;
             background: rgba(255, 255, 255, 0.5);
-            z-index: -1;
+            z-index: 0;
+        }
+
+        header, section {
+            position: relative;
+            z-index: 1;
         }
 
         header {
@@ -185,7 +190,6 @@
             transform: scale(1.05);
         }
 
-        /* Стили кнопки, чтобы она совпадала с остальными кнопками сайта */
         .contact-btn {
             padding: 10px 25px;
             border: none;
@@ -197,6 +201,7 @@
             margin-top: 15px;
             transition: 0.3s;
         }
+
         .contact-btn:hover {
             background-color: #555;
             transform: scale(1.05);
@@ -213,6 +218,13 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #mapModal.show {
+            display: flex;
+            opacity: 1;
         }
 
         #mapModal .modal-content {
@@ -257,6 +269,16 @@
                 padding: 10px 15px;
             }
         }
+
+        @media (max-width: 400px) {
+            header {
+                padding: 80px 5px;
+            }
+
+            section {
+                padding: 30px 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -273,7 +295,6 @@
     <button id="openMap">На карте</button>
 </section>
 
-<!-- Модалка карты -->
 <div id="mapModal">
     <div class="modal-content">
         <button id="closeMap" class="close-btn">×</button>
@@ -300,10 +321,8 @@
     <p>1. Свои тёплые слова и пожелания приносите в сердцах, а подарки – в конверте.</p>
     <p>2. Просим не обременять себя выбором цветов, Ваше присутствие скрасит этот день ярче любых букетов!</p>
     <p>3. По всем вопросам Вы можете обращаться к нашему свадебному организатору.</p>
-    <p>Алеся +375(29)1111111</p>
-    <button class="contact-btn" onclick="window.location.href='tel:+375291111111'">
-        Связаться
-    </button>
+    <p>Алеся +375447818283</p>
+    <button class="contact-btn" onclick="window.location.href='tel:+375447818283'">Связаться</button>
 </section>
 
 <section id="rsvp">
@@ -327,7 +346,7 @@
 <section id="countdown" style="margin-bottom: 5cm;"></section>
 
 <script>
-    // Таймер (можно убрать или оставить)
+    // Таймер
     const countdown = document.getElementById('countdown');
     const targetDate = new Date('2026-08-30T00:00:00');
 
@@ -344,13 +363,14 @@
         const mins = Math.floor((diff / (1000 * 60)) % 60);
         const secs = Math.floor((diff / 1000) % 60);
         countdown.innerHTML = `
-        <div class="time-box"><span>${days}</span>дней</div>
-        <div class="time-box"><span>${hours}</span>часов</div>
-        <div class="time-box"><span>${mins}</span>минут</div>
-        <div class="time-box"><span>${secs}</span>секунд</div>
+    <div class="time-box"><span>${days}</span>дней</div>
+    <div class="time-box"><span>${hours}</span>часов</div>
+    <div class="time-box"><span>${mins}</span>минут</div>
+    <div class="time-box"><span>${secs}</span>секунд</div>
     `;
     }
 
+    updateCountdown(); // сразу при загрузке
     setInterval(updateCountdown, 1000);
 
     // Анимации
@@ -366,24 +386,21 @@
     const openMapBtn = document.getElementById('openMap');
     const closeMapBtn = document.getElementById('closeMap');
     const mapModal = document.getElementById('mapModal');
-    openMapBtn.addEventListener('click', () => {
-        mapModal.style.display = 'flex';
-    });
-    closeMapBtn.addEventListener('click', () => {
-        mapModal.style.display = 'none';
-    });
+
+    openMapBtn.addEventListener('click', () => mapModal.classList.add('show'));
+    closeMapBtn.addEventListener('click', () => mapModal.classList.remove('show'));
     mapModal.addEventListener('click', (e) => {
-        if (e.target === mapModal) mapModal.style.display = 'none';
+        if (e.target === mapModal) mapModal.classList.remove('show');
     });
 
     // Форма RSVP
     document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
         e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
         const formData = new FormData(this);
         const params = new URLSearchParams();
-        for (const pair of formData) {
-            params.append(pair[0], pair[1]);
-        }
+        for (const pair of formData) params.append(pair[0], pair[1]);
         const message = document.getElementById('formMessage');
         try {
             const res = await fetch(this.action, {
@@ -395,13 +412,13 @@
                 message.style.color = 'green';
                 message.textContent = 'Спасибо! Ваш ответ отправлен ❤️';
                 this.reset();
-            } else {
-                throw new Error('Ошибка');
-            }
+            } else throw new Error('Ошибка');
         } catch (err) {
             message.style.color = 'red';
             message.textContent = 'Произошла ошибка. Попробуйте позже.';
             console.error(err);
+        } finally {
+            submitBtn.disabled = false;
         }
     });
 </script>
