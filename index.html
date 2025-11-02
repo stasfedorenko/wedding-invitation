@@ -16,16 +16,30 @@
         body {
             font-family: 'Open Sans', sans-serif;
             color: #333;
-            background-color: #fdfcfb;
-            overflow-x: hidden;
+            background: url('img/background.jpg') center/cover no-repeat fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 0;
+        }
+
+        header, section {
+            position: relative;
+            z-index: 1;
         }
 
         header {
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') center/cover no-repeat;
-            color: white;
+            color: #333;
             text-align: center;
             padding: 150px 20px;
-            transition: all 0.5s ease;
         }
 
         header h1 {
@@ -47,8 +61,8 @@
             color: #333;
             border: none;
             border-radius: 25px;
-            font-weight: 600;
             cursor: pointer;
+            font-weight: 600;
             transition: 0.3s;
         }
 
@@ -103,6 +117,7 @@
         section p {
             line-height: 1.6;
             font-size: 1.1em;
+            margin-bottom: 10px;
         }
 
         #countdown {
@@ -126,12 +141,26 @@
             font-weight: bold;
         }
 
-        iframe {
-            width: 100%;
-            height: 400px;
-            border: 0;
-            border-radius: 10px;
-            margin-top: 20px;
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #f4f4f4;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #777;
         }
 
         form {
@@ -141,7 +170,7 @@
             margin-top: 30px;
         }
 
-        input, select, textarea, button {
+        input, select, textarea, button.submit {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -161,13 +190,66 @@
             transform: scale(1.05);
         }
 
-        footer {
+        .contact-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        #mapModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #mapModal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        #mapModal .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #mapModal .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 30px;
             text-align: center;
-            padding: 30px;
-            background: #f4f4f4;
-            margin-top: 50px;
-            font-size: 0.9em;
-            color: #777;
         }
 
         @media (max-width: 600px) {
@@ -187,25 +269,62 @@
                 padding: 10px 15px;
             }
         }
+
+        @media (max-width: 400px) {
+            header {
+                padding: 80px 5px;
+            }
+
+            section {
+                padding: 30px 5px;
+            }
+        }
     </style>
 </head>
 <body>
+
 <header>
     <h1>Станислав и Виктория</h1>
     <p>30 августа 2026 года</p>
-    <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Подробнее</button>
+    <button onclick="document.getElementById('place').scrollIntoView({behavior:'smooth'})">Подробнее</button>
 </header>
-<section id="about">
-    <h2>Дорогие друзья!</h2>
-    <p>С любовью и радостью приглашаем вас отпраздновать с нами начало нашей семейной жизни. Этот день станет особенным,
-        и нам будет очень приятно разделить его с вами.</p>
-    <div id="countdown"></div>
-</section>
+
 <section id="place">
     <h2>Место проведения</h2>
     <p>Усадьба <b>Royal Hall</b><br>Логойский р-н, д. Чуденичи, ул. Лесная, д. 2А</p>
-    <iframe src="https://maps.google.com/maps?q=54.138,27.792&z=15&output=embed"></iframe>
+    <button id="openMap">На карте</button>
 </section>
+
+<div id="mapModal">
+    <div class="modal-content">
+        <button id="closeMap" class="close-btn">×</button>
+        <iframe src="https://maps.google.com/maps?q=54.138,27.792&z=15&output=embed"
+                style="width:100%; height:400px; border:0;"></iframe>
+    </div>
+</div>
+
+<section id="schedule">
+    <h2>Расписание</h2>
+    <p>15:00 — Сбор гостей</p>
+    <p>16:00 — Выездная церемония</p>
+    <p>17:00 — Банкет</p>
+</section>
+
+<section id="dresscode">
+    <h2>Dress code</h2>
+    <p>Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы поддержите цветовую гамму
+        нашей свадьбы.</p>
+</section>
+
+<section id="details">
+    <h2>Детали & Пожелания</h2>
+    <p>1. Свои тёплые слова и пожелания приносите в сердцах, а подарки – в конверте.</p>
+    <p>2. Просим не обременять себя выбором цветов, Ваше присутствие скрасит этот день ярче любых букетов!</p>
+    <p>3. По всем вопросам Вы можете обращаться к нашему свадебному организатору.</p>
+    <p>Алеся +375447818283</p>
+    <button class="contact-btn" onclick="window.location.href='tel:+375447818283'">Связаться</button>
+</section>
+
 <section id="rsvp">
     <h2>Подтверждение участия</h2>
     <form id="rsvpForm"
@@ -224,15 +343,15 @@
     <p id="formMessage"></p>
 </section>
 
-<footer>
-    С любовью, Станислав и Виктория ❤️
-</footer>
+<section id="countdown" style="margin-bottom: 5cm;"></section>
+
 <script>
-    // Таймер обратного отсчёта
+    // Таймер
     const countdown = document.getElementById('countdown');
     const targetDate = new Date('2026-08-30T00:00:00');
 
     function updateCountdown() {
+        if (!countdown) return;
         const now = new Date();
         const diff = targetDate - now;
         if (diff <= 0) {
@@ -244,16 +363,17 @@
         const mins = Math.floor((diff / (1000 * 60)) % 60);
         const secs = Math.floor((diff / 1000) % 60);
         countdown.innerHTML = `
-      <div class="time-box"><span>${days}</span>дней</div>
-      <div class="time-box"><span>${hours}</span>часов</div>
-      <div class="time-box"><span>${mins}</span>минут</div>
-      <div class="time-box"><span>${secs}</span>секунд</div>
+    <div class="time-box"><span>${days}</span>дней</div>
+    <div class="time-box"><span>${hours}</span>часов</div>
+    <div class="time-box"><span>${mins}</span>минут</div>
+    <div class="time-box"><span>${secs}</span>секунд</div>
     `;
     }
 
+    updateCountdown(); // сразу при загрузке
     setInterval(updateCountdown, 1000);
 
-    // Анимации при прокрутке
+    // Анимации
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -262,24 +382,43 @@
     }, {threshold: 0.2});
     sections.forEach(section => observer.observe(section));
 
-    // Обработка формы RSVP
+    // Модалка карты
+    const openMapBtn = document.getElementById('openMap');
+    const closeMapBtn = document.getElementById('closeMap');
+    const mapModal = document.getElementById('mapModal');
+
+    openMapBtn.addEventListener('click', () => mapModal.classList.add('show'));
+    closeMapBtn.addEventListener('click', () => mapModal.classList.remove('show'));
+    mapModal.addEventListener('click', (e) => {
+        if (e.target === mapModal) mapModal.classList.remove('show');
+    });
+
+    // Форма RSVP
     document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
         e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
         const formData = new FormData(this);
+        const params = new URLSearchParams();
+        for (const pair of formData) params.append(pair[0], pair[1]);
         const message = document.getElementById('formMessage');
         try {
-            const res = await fetch(this.action, {method: 'POST', body: formData});
+            const res = await fetch(this.action, {
+                method: 'POST',
+                body: params,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+            });
             if (res.ok) {
                 message.style.color = 'green';
                 message.textContent = 'Спасибо! Ваш ответ отправлен ❤️';
                 this.reset();
-            } else {
-                throw new Error('Ошибка при отправке');
-            }
+            } else throw new Error('Ошибка');
         } catch (err) {
             message.style.color = 'red';
             message.textContent = 'Произошла ошибка. Попробуйте позже.';
             console.error(err);
+        } finally {
+            submitBtn.disabled = false;
         }
     });
 </script>
