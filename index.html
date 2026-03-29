@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Станислав и Виктория — Наша Свадьба</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap"
-          rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/head-favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/head-favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/head-favicon/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes=512x512" href="/img/head-favicon/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/head-favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/img/head-favicon/favicon.svg">
+
     <style>
         * {
             margin: 0;
@@ -364,6 +371,72 @@
             font-size: 0.9em;
             color: #888;
         }
+
+        /* === DRESSCODE — ЦВЕТОВАЯ ПАЛИТРА === */
+        #dresscode {
+            margin: 40px 0;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;           /* Центрирование по горизонтали */
+            gap: 35px 25px;                    /* Отступ между элементами */
+            max-width: 900px;
+            margin: 35px auto 0;
+            padding: 0 15px;
+        }
+
+        /* Карточка с цветом */
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;               /* Центрирование содержимого внутри */
+            width: 110px;                      /* Фиксированная ширина для ровного вида */
+            font-size: 0.88em;
+            color: #555;
+        }
+
+        /* Круг с цветом */
+        .color-circle {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            margin-bottom: 12px;
+            border: 4px solid #f8f8f8;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .color-circle:hover {
+            transform: scale(1.12);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Цвета */
+        .black   { background: #000; }
+        .half    { background: linear-gradient(to right, #000 50%, #fff 50%); }
+        .milk    { background: #f5f1ea; }
+        .dark-choco { background: #3e2723; }
+        .milk-choco { background: #a47551; }
+        .beige   { background: #d8c3a5; }
+
+        /* Адаптив — на очень широких экранах помещается больше */
+        @media (min-width: 768px) {
+            .color-palette {
+                gap: 40px 30px;
+            }
+            .color-circle {
+                width: 72px;
+                height: 72px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .color-item {
+                width: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -420,10 +493,43 @@
     <p>17:00 — Банкет</p>
 </section>
 
-<section id="dresscode">
+<section>
     <h2>Dress code</h2>
-    <p>Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы поддержите цветовую гамму
-        нашей свадьбы.</p>
+    <p>Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы поддержите цветовую гамму нашей свадьбы.</p>
+
+    <div id="dresscode">
+        <div class="color-palette">
+            <div class="color-item">
+                <div class="color-circle black"></div>
+                <span>Чёрный</span>
+            </div>
+
+            <div class="color-item">
+                <div class="color-circle half"></div>
+                <span>Чёрно-белый</span>
+            </div>
+
+            <div class="color-item">
+                <div class="color-circle milk"></div>
+                <span>Молочный</span>
+            </div>
+
+            <div class="color-item">
+                <div class="color-circle dark-choco"></div>
+                <span>Тёмный шоколад</span>
+            </div>
+
+            <div class="color-item">
+                <div class="color-circle milk-choco"></div>
+                <span>Молочный шоколад</span>
+            </div>
+
+            <div class="color-item">
+                <div class="color-circle beige"></div>
+                <span>Бежевый</span>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section id="details">
