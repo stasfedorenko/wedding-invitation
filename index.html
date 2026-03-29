@@ -23,19 +23,43 @@
         body {
             font-family: 'Open Sans', sans-serif;
             color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+
+            /* Фон изображения */
             background: url('img/background.jpg') center/cover no-repeat fixed;
             position: relative;
         }
 
+        /* Полупрозрачный белый оверлей */
         body::before {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(255, 255, 255, 0.5);
-            z-index: 0;
+            z-index: -1;           /* Важно: отрицательный z-index */
+            pointer-events: none;
+        }
+
+        /* Исправление для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;   /* Отключаем fixed на мобильных — более стабильно */
+            }
+
+            body::before {
+                position: absolute;              /* На мобильных лучше absolute */
+                height: 100%;                    /* или 200vh если нужно перекрыть всё */
+            }
+        }
+
+        /* Дополнительно убираем возможные белые артефакты */
+        section {
+            background: transparent !important;
         }
 
         header, section {
