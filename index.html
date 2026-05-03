@@ -9,9 +9,13 @@
     <link rel="icon" href="/img/head-favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="96x96" href="/img/head-favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/img/head-favicon/favicon-192x192.png">
-    <link rel="icon" type="image/png" sizes=512x512" href="/img/head-favicon/favicon-512x512.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/img/head-favicon/favicon-512x512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/head-favicon/apple-touch-icon.png">
     <link rel="icon" type="image/svg+xml" href="/img/head-favicon/favicon.svg">
+
+    <!-- Романтичный шрифт Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap"
+          rel="stylesheet">
 
     <style>
         * {
@@ -23,43 +27,20 @@
         body {
             font-family: 'Open Sans', sans-serif;
             color: #333;
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
-
-            /* Фон изображения */
-            background: url('img/background.jpg') center/cover no-repeat fixed;
-            position: relative;
-        }
-
-        /* Полупрозрачный белый оверлей */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: -1;           /* Важно: отрицательный z-index */
-            pointer-events: none;
+            background: #f9f7f2;
         }
 
         /* Исправление для мобильных устройств */
         @media (max-width: 768px) {
             body {
-                background-attachment: scroll;   /* Отключаем fixed на мобильных — более стабильно */
+                background-attachment: scroll; /* Отключаем fixed на мобильных — более стабильно */
             }
 
             body::before {
-                position: absolute;              /* На мобильных лучше absolute */
-                height: 100%;                    /* или 200vh если нужно перекрыть всё */
+                position: absolute; /* На мобильных лучше absolute */
+                height: 100%; /* или 200vh если нужно перекрыть всё */
             }
-        }
-
-        /* Дополнительно убираем возможные белые артефакты */
-        section {
-            background: transparent !important;
         }
 
         header, section {
@@ -70,14 +51,13 @@
         header {
             color: #333;
             text-align: center;
-            padding: 150px 20px;
+            padding: 70px 40px 60px;
         }
 
         header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3em;
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.8em;
             margin-bottom: 0.3em;
-            animation: fadeInDown 1.5s ease;
         }
 
         header p {
@@ -102,28 +82,6 @@
             transform: scale(1.05);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         section {
             padding: 60px 20px;
             text-align: center;
@@ -132,11 +90,6 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.8s ease;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         section h2 {
@@ -151,6 +104,569 @@
             margin-bottom: 10px;
         }
 
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== БЛОК ВОСПОМИНАНИЯ ==================== */
+        #memory {
+            padding: 10px 0 20px;
+            background: #f9f7f2;
+        }
+
+        #memory header {
+            color: #333;
+            text-align: center;
+            padding: 30px 10px 0;
+        }
+
+        /* ==================== АНИМИРОВАННЫЙ ЗАГОЛОВОК ==================== */
+        .hero-names {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .name-left,
+        .name-right {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.8em;
+            color: #2c2c2c;
+            line-height: 1;
+            white-space: nowrap;
+            opacity: 0;
+        }
+
+        /* Анимация Станислава — вылет слева */
+        .name-left {
+            animation: flyFromLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Анимация Виктории — вылет справа */
+        .name-right {
+            animation: flyFromRight 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* Анимация плюса — появляется из точки в центре */
+        .plus-sign {
+            font-family: 'Great Vibes', sans-serif;
+            font-size: 5.2em;
+            color: #2c2c2c;
+            line-height: 1;
+            white-space: nowrap;
+            opacity: 0;
+            animation: scaleFromCenter 1.1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.6s forwards;
+        }
+
+        /* Ключевые анимации */
+        @keyframes flyFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-120px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes flyFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(120px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleFromCenter {
+            0% {
+                opacity: 0;
+                transform: scale(0.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Дата под именами */
+        header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7em;
+            margin-top: 0;
+            color: #444;
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        .pure-photo-container {
+            position: relative;
+            height: 700px; /* для компьютера и планшетов */
+            max-width: 820px;
+            margin: 20px auto 40px;
+        }
+
+        .pure-photo {
+            position: absolute;
+            width: 100%;
+            max-width: 380px;
+            opacity: 0;
+            transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .left {
+            left: 35px;
+            top: 10px;
+            z-index: 1;
+            transform: translateX(-220px) rotate(-40deg);
+        }
+
+        .right {
+            right: 30px;
+            top: 300px;
+            z-index: 2;
+            transform: translateX(320px) rotate(40deg);
+        }
+
+        .pure-photo.visible {
+            opacity: 1;
+            transform: translateX(0) rotate(var(--final-rotate));
+        }
+
+        .pure-photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        /* ==================== TYPEWRITER — ПОДПИСИ ==================== */
+        .photo-label {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.1em;
+            color: #222;
+            letter-spacing: 2px;
+            overflow: hidden;
+            display: inline-block;
+            opacity: 0;
+        }
+
+        .left-photo-label {
+            position: absolute;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%) rotate(-5deg);
+        }
+
+        .right-photo-label {
+            position: absolute;
+            left: 40%;
+            bottom: 70px;
+            transform: translateX(-50%) rotate(6deg);
+        }
+
+        /* Анимация typewriter */
+        .photo-label::after {
+            content: attr(data-text);
+            display: inline-block;
+            animation: typewriter 2.6s steps(100, end) forwards;
+            white-space: nowrap;
+        }
+
+        .pure-photo.visible .photo-label {
+            opacity: 1;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+        .memory-decorative-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
+        }
+
+        .decor-line {
+            position: absolute;
+            width: 80px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+            z-index: 1;
+        }
+
+        .left-line {
+            top: 40px;
+            left: 0;
+        }
+
+        .right-line {
+            top: 400px;
+            right: 40px;
+            transform: rotate(12deg);
+        }
+
+        .decor-stars {
+            position: absolute;
+            top: 0;
+            left: 80%;
+            transform: translateX(-50%);
+            width: 30%;
+            opacity: 0.65;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .decor-envelope {
+            position: absolute;
+            bottom: 195px;
+            left: 5%;
+            width: 20%;
+            z-index: 3;
+        }
+
+        .decor-rings {
+            position: absolute;
+            bottom: 150px;
+            left: 30%;
+            width: 15%;
+            z-index: 3;
+        }
+
+        .decor-heart {
+            position: absolute;
+            bottom: 20px;
+            left: 10%;
+            width: 20%;
+            z-index: 3;
+            transform: rotate(-12deg);
+        }
+
+        /* ==================== МОБИЛЬНАЯ ВЕРСИЯ — ФОТО + ПОДПИСИ ==================== */
+        @media (max-width: 768px) {
+            .hero-names {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .name-left,
+            .name-right {
+                font-family: 'Great Vibes', cursive;
+                font-size: 2.8em;
+                color: #2c2c2c;
+                line-height: 1;
+                white-space: nowrap;
+                opacity: 0;
+            }
+
+            /* Анимация плюса — появляется из точки в центре */
+            .plus-sign {
+                font-family: 'Great Vibes', sans-serif;
+                font-size: 5.2em;
+                color: #2c2c2c;
+                line-height: 1;
+                white-space: nowrap;
+                opacity: 0;
+                animation: scaleFromCenter 1.1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.6s forwards;
+            }
+
+            /* Дата под именами */
+            header h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.7em;
+                margin-top: 0;
+                color: #444;
+                letter-spacing: 4px;
+                font-weight: 400;
+            }
+
+            .pure-photo-container {
+                height: 820px; /* оптимальная высота для телефонов */
+                margin: 15px auto 35px;
+            }
+
+            .pure-photo {
+                max-width: 80%; /* фото становятся заметно меньше */
+            }
+
+            .left {
+                left: 15px;
+                top: 15px;
+                z-index: 1;
+                transform: translateX(-120px) rotate(-40deg);
+            }
+
+            .right {
+                right: 15px;
+                top: 315px;
+                z-index: 2;
+                transform: translateX(120px) rotate(40deg);
+            }
+
+            .photo-label {
+                font-family: 'Great Vibes', cursive;
+                font-size: 3.1em;
+                color: #222;
+                letter-spacing: 2px;
+                overflow: hidden;
+                display: inline-block;
+                opacity: 0;
+            }
+
+            .left-photo-label {
+                font-size: 1.35em;
+                position: absolute;
+                left: 50%;
+                bottom: 50px;
+                transform: translateX(-50%) rotate(-5deg);
+            }
+
+            .right-photo-label {
+                font-size: 1.35em;
+                position: absolute;
+                left: 40%;
+                bottom: 80px;
+                transform: translateX(-50%) rotate(6deg);
+            }
+
+            /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+            .memory-decorative-container {
+                position: relative;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 20px 20px 0;
+            }
+
+            .decor-line {
+                position: absolute;
+                width: 10%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+                z-index: 1;
+            }
+
+            .left-line {
+                top: 65px;
+                left: 15px;
+            }
+
+            .right-line {
+                top: 410px;
+                right: 40px;
+                transform: rotate(12deg);
+            }
+
+            .decor-stars {
+                position: absolute;
+                top: 0;
+                left: 80%;
+                transform: translateX(-50%);
+                width: 30%;
+                opacity: 0.65;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .decor-envelope {
+                position: absolute;
+                bottom: 395px;
+                left: 5%;
+                width: 20%;
+                z-index: 3;
+            }
+
+            .decor-rings {
+                position: absolute;
+                bottom: 210px;
+                left: 70%;
+                width: 15%;
+                z-index: 3;
+            }
+
+            .decor-heart {
+                position: absolute;
+                bottom: 160px;
+                left: 10%;
+                width: 20%;
+                z-index: 3;
+                transform: rotate(-12deg);
+            }
+        }
+
+        /* Самые маленькие экраны (iPhone SE, старые Android) */
+        @media (max-width: 400px) {
+            .hero-names {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .name-left,
+            .name-right {
+                font-family: 'Great Vibes', cursive;
+                font-size: 2.5em;
+                color: #2c2c2c;
+                line-height: 1;
+                white-space: nowrap;
+                opacity: 0;
+            }
+
+            /* Анимация плюса — появляется из точки в центре */
+            .plus-sign {
+                font-family: 'Great Vibes', sans-serif;
+                font-size: 3em;
+                color: #2c2c2c;
+                line-height: 1;
+                white-space: nowrap;
+                opacity: 0;
+                animation: scaleFromCenter 1.1s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.6s forwards;
+            }
+
+            /* Дата под именами */
+            header h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 2em;
+                margin-top: 0;
+                color: #444;
+                letter-spacing: 4px;
+                font-weight: 400;
+            }
+
+            .pure-photo-container {
+                height: 620px; /* оптимальная высота для телефонов */
+                margin: 15px auto 35px;
+            }
+
+            .pure-photo {
+                max-width: 70%; /* фото становятся заметно меньше */
+            }
+
+            .left {
+                left: 15px;
+                top: 15px;
+                z-index: 1;
+                transform: translateX(-120px) rotate(-40deg);
+            }
+
+            .right {
+                right: 15px;
+                top: 255px;
+                z-index: 2;
+                transform: translateX(120px) rotate(40deg);
+            }
+
+            .photo-label {
+                font-family: 'Great Vibes', cursive;
+                font-size: 3.1em;
+                color: #222;
+                letter-spacing: 2px;
+                overflow: hidden;
+                display: inline-block;
+                opacity: 0;
+            }
+
+            .left-photo-label {
+                font-size: 1.35em;
+                position: absolute;
+                left: 50%;
+                bottom: 30px;
+                transform: translateX(-50%) rotate(-5deg);
+            }
+
+            .right-photo-label {
+                font-size: 1.35em;
+                position: absolute;
+                left: 40%;
+                bottom: 60px;
+                transform: translateX(-50%) rotate(6deg);
+            }
+
+            /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+            .memory-decorative-container {
+                position: relative;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 20px 20px 0;
+            }
+
+            .decor-line {
+                position: absolute;
+                width: 10%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+                z-index: 1;
+            }
+
+            .left-line {
+                top: 65px;
+                left: 15px;
+            }
+
+            .right-line {
+                top: 330px;
+                right: 30px;
+                transform: rotate(12deg);
+            }
+
+            .decor-stars {
+                position: absolute;
+                top: 0;
+                left: 80%;
+                transform: translateX(-50%);
+                width: 30%;
+                opacity: 0.65;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .decor-envelope {
+                position: absolute;
+                bottom: 195px;
+                left: 5%;
+                width: 20%;
+                z-index: 3;
+            }
+
+            .decor-rings {
+                position: absolute;
+                bottom: 110px;
+                left: 70%;
+                width: 15%;
+                z-index: 3;
+            }
+
+            .decor-heart {
+                position: absolute;
+                bottom: 60px;
+                left: 10%;
+                width: 20%;
+                z-index: 3;
+                transform: rotate(-12deg);
+            }
+        }
+
+        /* Таймер */
         #countdown {
             display: flex;
             justify-content: center;
@@ -238,218 +754,469 @@
             transform: scale(1.05);
         }
 
+        /* ==================== МОДАЛКА КАРТЫ — УЛУЧШЕННАЯ ДЛЯ ТЕЛЕФОНА ==================== */
         #mapModal {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            inset: 0;
+            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background: rgba(44, 44, 44, 0.82);
+            z-index: 10000;
         }
 
         #mapModal.show {
             display: flex;
-            opacity: 1;
         }
 
         #mapModal .modal-content {
-            position: relative;
-            width: 92%;
-            max-width: 720px;
-            background: #fff;
-            border-radius: 20px;
+            width: 50%;
+            height: 50%; /* ← ограничение */
+
+            background: #f9f7f2;
+            border-radius: 26px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.4s ease;
+
+            display: flex; /* ← ключ */
+            flex-direction: column;
         }
 
+        @keyframes modalPop {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ==================== МОБИЛЬНАЯ АДАПТАЦИЯ ==================== */
+        @media {
+            #mapModal .modal-content {
+                width: 95%;
+                height: 70%;
+
+                margin: 0;
+                border-radius: 22px;
+            }
+
+            #mapModal .map-header {
+                padding: 30px 20px 12px;
+            }
+
+            #mapModal .map-header h3 {
+                font-size: 1.95em;
+            }
+
+            #mapModal .map-container iframe {
+                border-radius: 16px;
+            }
+
+            #mapModal .map-switch {
+                padding: 10px 20px 18px;
+                gap: 10px;
+            }
+
+            #mapModal .map-footer {
+                padding: 14px 25px 22px;
+                font-size: 1.05em;
+            }
+        }
+
+        /* Остальные стили модалки */
         #mapModal .close-btn {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
+            top: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background: #2c2c2c;
+            color: #f9f7f2;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 20px;
-            line-height: 1;
-            transition: 0.3s;
+            font-size: 28px;
+            z-index: 10;
+            transition: all 0.3s ease;
         }
 
         #mapModal .close-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 100px 10px;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            section {
-                padding: 40px 10px;
-            }
-
-            .time-box {
-                padding: 10px 15px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            header {
-                padding: 80px 5px;
-            }
-
-            section {
-                padding: 30px 5px;
-            }
-        }
-
-        #mapModal .map-switch {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding: 15px;
-        }
-
-        #mapModal .map-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            background: #f8f8f8;
-            cursor: pointer;
-            font-size: 0.9em;
-            color: #000;
-            transition: all 0.25s ease;
-        }
-
-        #mapModal .map-btn.active {
-            background: #333;
-            color: #fff;
-            border-color: #333;
-        }
-
-        #mapModal .map-btn:hover {
-            background: #eee;
-            color: #000;
-        }
-
-        #mapModal .map-container {
-            padding: 0 15px 15px;
-        }
-
-        #mapModal .map-container iframe {
-            width: 100%;
-            height: 360px;
-            border: none;
-            border-radius: 15px;
-        }
-
-        #mapModal .map-footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px 20px;
-            font-size: 0.85em;
-            color: #777;
-        }
-
-        #mapModal .map-footer a {
-            text-decoration: none;
-            color: #555;
-            transition: 0.3s;
-        }
-
-        #mapModal .map-footer a:hover {
-            color: #000;
+            background: #d4af77;
+            color: #2c2c2c;
+            transform: rotate(90deg);
         }
 
         #mapModal .map-header {
-            padding: 25px 20px 10px;
+            padding: 35px 30px 15px;
             text-align: center;
         }
 
         #mapModal .map-header h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6em;
-            margin-bottom: 5px;
+            font-size: 2.1em;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            letter-spacing: 1px;
         }
 
         #mapModal .map-header p {
-            font-size: 0.9em;
-            color: #888;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35em;
+            color: #555;
+            margin: 0;
         }
 
-        /* === DRESSCODE — ЦВЕТОВАЯ ПАЛИТРА === */
+        #mapModal .map-switch {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 30px 20px;
+        }
+
+        #mapModal .map-btn {
+            padding: 12px 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            border-radius: 30px;
+            border: 2px solid #d4af77;
+            background: #fff;
+            color: #2c2c2c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #mapModal .map-btn.active,
+        #mapModal .map-btn:hover {
+            background: #d4af77;
+            color: #2c2c2c;
+        }
+
+        #mapModal .map-container {
+            flex: 1; /* ← занимает всё доступное место */
+            padding: 0 15px 15px;
+        }
+
+        #mapModal .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* ==================== КНОПКИ В ФУТЕРЕ МОДАЛКИ ==================== */
+        .map-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            padding: 28px 30px 32px;
+            background: #f9f7f2;
+        }
+
+        .map-link-btn {
+            flex: 1;
+            min-width: 225px;
+            padding: 16px 34px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2c2c2c;
+            background: #f5f1e8;
+            border: 2.5px solid #d4af77;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-link-btn:hover {
+            background: #d4af77;
+            color: #2c2c2c;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(212, 175, 119, 0.4);
+        }
+
+        #mapModal .map-footer a {
+            color: #555;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+
+        #mapModal .map-footer a:hover {
+            color: #d4af77;
+        }
+
+        /* ==================== DRESS CODE — СТИЛЬ TILDA ==================== */
+
         #dresscode {
-            margin: 40px 0;
+            padding: 40px 20px 0;
         }
 
+        .dresscode-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 0;
+            text-align: center;
+        }
+
+        .dresscode-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.9em;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .dresscode-desc {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.75em;
+            color: #555;
+            max-width: 720px;
+            margin: 0 auto 50px;
+        }
+
+        /* ==================== COLOR PALETTE — ГОРИЗОНТАЛЬНОЕ РАСПОЛОЖЕНИЕ ==================== */
         .color-palette {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;           /* Центрирование по горизонтали */
-            gap: 35px 25px;                    /* Отступ между элементами */
-            max-width: 900px;
-            margin: 35px auto 0;
-            padding: 0 15px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 45px 35px;
+            max-width: 1100px;
+            margin: 40px auto 70px;
+            padding: 0 20px;
         }
 
-        /* Карточка с цветом */
         .color-item {
             display: flex;
             flex-direction: column;
-            align-items: center;               /* Центрирование содержимого внутри */
-            width: 110px;                      /* Фиксированная ширина для ровного вида */
-            font-size: 0.88em;
-            color: #555;
+            align-items: center;
+            width: 140px; /* базовая ширина */
+            flex-shrink: 0;
         }
 
-        /* Круг с цветом */
         .color-circle {
-            width: 68px;
-            height: 68px;
+            width: 98px;
+            height: 98px;
             border-radius: 50%;
-            margin-bottom: 12px;
-            border: 4px solid #f8f8f8;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 14px;
+            object-fit: cover;
+            border: 6px solid #f9f7f2;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
             transition: all 0.3s ease;
         }
 
         .color-circle:hover {
-            transform: scale(1.12);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
         }
 
-        /* Цвета */
-        .black   { background: #000; }
-        .half    { background: linear-gradient(to right, #000 50%, #fff 50%); }
-        .milk    { background: #f5f1ea; }
-        .dark-choco { background: #3e2723; }
-        .milk-choco { background: #a47551; }
-        .beige   { background: #d8c3a5; }
+        .color-item span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.50em;
+            color: #444;
+            text-align: center;
+        }
+
+        /* ==================== АДАПТИВ ==================== */
+
+        /* Мобильные — 2 в ряд */
+        @media (max-width: 768px) {
+            .color-palette {
+                gap: 38px 0;
+            }
+
+            .color-item {
+                width: 40%; /* ≈ 2 в ряд */
+            }
+
+            .color-circle {
+                width: 88px;
+                height: 88px;
+            }
+        }
+
+        /* Планшет и небольшие ноутбуки — 3 в ряд */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .color-item {
+                width: 30%;
+            }
+        }
+
+        /* Широкие экраны — 3 в ряд с большим пространством */
+        @media (min-width: 1025px) {
+            .color-item {
+                width: 28%;
+            }
+        }
+
+        .photo-gallery {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto 0;
+            min-height: 380px;
+            padding-bottom: 20px;
+        }
+
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-slide {
+            width: 100%;
+            flex-shrink: 0;
+            height: auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            background: rgba(44, 44, 44, 0.9);
+            color: white;
+            border: none;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-arrow:hover {
+            background: #2c2c2c;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-arrow-left {
+            left: -10px;
+        }
+
+        .gallery-arrow-right {
+            right: -10px;
+        }
+
+        /* Адаптив */
+        @media (max-width: 480px) {
+            .gallery-slider {
+                max-width: 92%;
+            }
+
+            .gallery-arrow {
+                width: 46px;
+                height: 46px;
+                font-size: 26px;
+            }
+        }
+
+        /* Адаптив */
+        @media (max-width: 480px) {
+            .color-circle {
+                width: 68px;
+                height: 68px;
+            }
+
+            .gallery-track img {
+                width: 240px;
+            }
+        }
+
+        /* ==================== LIGHTBOX — ПО АНАЛОГИИ С #mapModal ==================== */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        #lightbox.show {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-width: 100%;
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        #lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 48px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 100001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+        }
+
+        /* Мобильная версия — максимально жёстко */
+        @media {
+            #lightbox {
+                max-height: 100%;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            #lightbox-image {
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+            #lightbox-close {
+                top: 18px;
+                right: 18px;
+                font-size: 42px;
+                width: 52px;
+                height: 52px;
+            }
+        }
 
         /* Адаптив — на очень широких экранах помещается больше */
         @media (min-width: 768px) {
             .color-palette {
                 gap: 40px 30px;
             }
+
             .color-circle {
                 width: 72px;
                 height: 72px;
@@ -461,24 +1228,1102 @@
                 width: 120px;
             }
         }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== СЕКЦИЯ «НАША ИСТОРИЯ» ==================== */
+        #our-story {
+            padding: 10px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .story-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.65em;
+            line-height: 1.25;
+            color: #2c2c2c;
+            margin: 0;
+        }
+
+        .story-text.top {
+            margin-bottom: 45px;
+        }
+
+        .story-text.bottom {
+            margin-top: 45px;
+            font-size: 2.55em;
+        }
+
+        /* Рамка Polaroid */
+        .polaroid-frame {
+            position: relative;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 18px;
+            background: #f8f1e3; /* тёплый бежевый цвет как на картинке */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            transform: rotate(-2.5deg); /* лёгкий наклон */
+            transition: transform 0.4s ease;
+        }
+
+        .polaroid-frame:hover {
+            transform: rotate(1deg);
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 10px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+        }
+
+        /* ==================== СЕКЦИЯ МУЗЫКИ ==================== */
+        #music {
+            padding: 30px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .music-container {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .music-circle {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+            background: #f8f1e3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .music-circle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .speaker-icon {
+            transition: all 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .music-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4em;
+            color: #2c2c2c;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* ==================== СЕКЦИЯ ПРИГЛАШЕНИЯ + КАЛЕНДАРЬ ==================== */
+        #invitation {
+            padding: 70px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .title, .month, .main-text, .bottom-text {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .title {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: #2c2c2c;
+        }
+
+        .main-text {
+            font-size: 1.45em;
+            line-height: 1.45;
+            max-width: 620px;
+            margin: 0 auto 50px;
+        }
+
+        .month {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.6em;
+            margin-bottom: 40px;
+            color: #2c2c2c;
+        }
+
+        .calendar {
+            max-width: 620px;
+            margin: 0 auto 70px;
+            background: #fff;
+            padding: 35px 25px 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-size: 1.1em;
+            color: #777;
+            margin-bottom: 12px;
+            text-transform: lowercase;
+        }
+
+        .dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            font-size: 1.35em;
+        }
+
+        .date {
+            position: relative;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .special {
+            color: #2c2c2c;
+            font-weight: 700;
+            position: relative;
+        }
+
+        /* ==================== КОЛЬЦО С ПЛАВНЫМ ВРАЩЕНИЕМ ==================== */
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 75px;
+            height: 75px;
+            transform: translate(-50%, -450%) scale(8) rotate(-720deg);
+            opacity: 0;
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.35));
+        }
+
+        #special-date.animate .ring {
+            animation: ringUltraSmoothDrop 3.4s cubic-bezier(1, 1, 1, 1) forwards;
+        }
+
+        @keyframes ringUltraSmoothDrop {
+            0% {
+                transform: translate(-50%, -650%) scale(9.8) rotate(-720deg);
+                opacity: 0;
+            }
+            15% {
+                transform: translate(-50%, -480%) scale(6.5) rotate(-540deg);
+                opacity: 0.3;
+            }
+            30% {
+                transform: translate(-50%, -320%) scale(3.8) rotate(-360deg);
+                opacity: 0.85;
+            }
+            45% {
+                transform: translate(-50%, -190%) scale(2.3) rotate(-180deg);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(-50%, -105%) scale(1.45) rotate(-90deg);
+            }
+            73% {
+                transform: translate(-50%, -68%) scale(1.12) rotate(-35deg);
+            }
+            82% {
+                transform: translate(-50%, -65%) scale(1.04) rotate(-22deg);
+            }
+            91% {
+                transform: translate(-50%, -62%) scale(1.01) rotate(-20deg);
+            }
+            100% {
+                transform: translate(-50%, -60%) scale(1) rotate(-19deg); /* финальный лёгкий наклон */
+                opacity: 1;
+            }
+        }
+
+        .bottom-text {
+            font-size: 1.45em;
+            line-height: 1.4;
+            color: #333;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ==================== НОВЫЙ СТИЛЬ СЕКЦИИ МЕСТО ПРОВЕДЕНИЯ ==================== */
+        #place {
+            padding: 30px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .place-container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ==================== ДЕКОРАТИВНЫЙ БАНТ (картинка) ==================== */
+        .decorative-bow {
+            display: block;
+            width: 110px; /* подбери размер под свою картинку */
+            height: auto;
+            margin: 0 auto 22px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Если хочешь чуть больше или меньше — измени только это значение */
+        @media (max-width: 600px) {
+            .decorative-bow {
+                width: 200px;
+            }
+        }
+
+        .place-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.35em;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            color: #2c2c2c;
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1em;
+            margin: 18px 0 22px;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .place-address {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35em;
+            line-height: 1.45;
+            color: #444;
+            margin-bottom: 45px;
+        }
+
+        .place-button {
+            padding: 16px 48px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: #f0e9df;
+            color: #2c2c2c;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .place-button:hover {
+            background: #e8d9c8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Адаптив */
+        @media (max-width: 600px) {
+            .place-title {
+                font-size: 2.1em;
+            }
+
+            .venue-name {
+                font-size: 1.85em;
+            }
+
+            .place-address {
+                font-size: 1.25em;
+            }
+        }
+
+        /* ==================== ПРОГРАММА ДНЯ ==================== */
+        #schedule {
+            padding: 30px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .program-wrapper {
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        .program-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.9em;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .timeline-container {
+            position: relative;
+            margin-top: -100px;
+        }
+
+        #timeline-svg {
+            display: block;
+            margin-bottom: -220px;
+        }
+
+        #heart-pointer {
+            transition: transform 0.1s linear;
+        }
+
+        /* ==================== АНИМАЦИЯ СОБЫТИЙ В TIMELINE ==================== */
+        .event-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px) scale(0.82);
+            transition: all 0.95s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+
+        .event-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .event-icon img {
+            width: 68px;
+            height: 68px;
+            object-fit: contain;
+        }
+
+        .event-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.65em;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin: 8px 0 4px;
+        }
+
+        .event-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25em;
+            color: #555;
+            text-align: center;
+            max-width: 180px;
+        }
+
+        #timeline-svg {
+            width: 100%;
+            height: 1020px;
+            display: block;
+            margin-bottom: -100px;
+        }
+
+        /* ==================== ПОЗИЦИИ НА КОМПЬЮТЕРЕ ==================== */
+        .event-1 {
+            top: 10%;
+            left: 10%;
+        }
+
+        .event-2 {
+            top: 25%;
+            right: 10%;
+        }
+
+        .event-3 {
+            top: 55%;
+            left: 8%;
+        }
+
+        .event-4 {
+            top: 75%;
+            right: 10%;
+        }
+
+        /* ==================== АДАПТИВ ДЛЯ МОБИЛКИ ==================== */
+        @media (max-width: 768px) {
+            #schedule {
+                padding: 10px 0 10px; /* уменьшили отступы */
+            }
+
+            .program-wrapper {
+                max-width: 100%;
+                padding: 0 0;
+            }
+
+            .program-title {
+                font-size: 2.4em;
+                margin-bottom: 35px;
+            }
+
+            #timeline-svg {
+                height: 680px; /* оптимальная высота для телефона */
+                margin-bottom: -100px;
+            }
+
+            .event-item {
+                width: 160px;
+            }
+
+            /* Позиции событий на телефоне */
+            .event-1 {
+                top: 10%;
+                left: 8%;
+            }
+
+            .event-2 {
+                top: 25%;
+                right: 3%;
+            }
+
+            .event-3 {
+                top: 50%;
+                left: 8%;
+            }
+
+            .event-4 {
+                top: 70%;
+                right: 3%;
+            }
+
+            .event-icon img {
+                width: 54px;
+                height: 54px;
+            }
+
+            .event-time {
+                font-size: 1.45em;
+            }
+
+            .event-text {
+                font-size: 1.1em;
+                max-width: 140px;
+            }
+        }
+
+        /* ==================== АНКЕТА ГОСТЯ ==================== */
+        #rsvp {
+            padding: 10px 0 10px;
+            background: #f9f7f2;
+        }
+
+        .rsvp-card {
+            max-width: 620px;
+            margin: 0 auto;
+            background: #e9e1d6;
+            border-radius: 24px;
+            padding: 45px 30px 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        .rsvp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7em;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+        }
+
+        .rsvp-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 22px; /* уменьшили отступы */
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.18em;
+            margin-bottom: 9px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 2px solid #d4af77;
+            background: transparent;
+            font-size: 1.1em;
+            outline: none;
+        }
+
+        /* ==================== RADIO И CHECKBOX — ИДЕАЛЬНОЕ ЦЕНТРИРОВАНИЕ ==================== */
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center; /* главное выравнивание */
+            gap: 10px;
+            font-size: 1.22em;
+            cursor: pointer;
+            padding: 4px 0;
+            min-height: 32px; /* стабильная высота */
+        }
+
+        .radio-group label input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            flex-shrink: 0; /* не сжимается */
+            width: 26px;
+            height: 26px;
+            margin: 0;
+            accent-color: #2c2c2c;
+        }
+
+        .radio-group label span,
+        .checkbox-group label span {
+            line-height: 1.1; /* текст не съезжает вниз */
+            padding-top: 1px;
+        }
+
+        /* Кнопка */
+        .rsvp-submit-btn {
+            margin-top: 15px;
+            padding: 18px 70px;
+            background: #2c2c2c;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .rsvp-submit-btn:hover {
+            background: #d4af77;
+            color: #2c2c2c;
+        }
+
+        /* ==================== МОБИЛЬНАЯ ВЕРСИЯ — ЕЩЁ КОМПАКТНЕЕ ==================== */
+        @media (max-width: 768px) {
+            .rsvp-card {
+                padding: 38px 25px 30px;
+            }
+
+            .rsvp-title {
+                font-size: 2.35em;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                font-size: 1.22em;
+            }
+
+            .radio-label,
+            .checkbox-group label {
+                font-size: 1.22em;
+                gap: 16px;
+            }
+
+            .radio-label input[type="radio"],
+            .checkbox-group input[type="checkbox"] {
+                width: 30px;
+                height: 30px;
+            }
+
+            .rsvp-submit-btn {
+                padding: 16px 80px;
+                font-size: 1.3em;
+            }
+        }
+
+        /* ==================== ДЕТАЛИ ==================== */
+        #details {
+            padding: 80px 20px 70px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .details-container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .details-envelope {
+            width: 110px;
+            height: auto;
+            margin-bottom: 35px;
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.15));
+        }
+
+        .details-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.85em;
+            color: #2c2c2c;
+            margin-bottom: 28px;
+            letter-spacing: 3px;
+        }
+
+        .details-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.32em;
+            line-height: 1.62;
+            color: #444;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* Мобильная версия — компактно и красиво */
+        @media (max-width: 768px) {
+            #details {
+                padding: 65px 20px 55px;
+            }
+
+            .details-envelope {
+                width: 96px;
+                margin-bottom: 28px;
+            }
+
+            .details-title {
+                font-size: 2.45em;
+            }
+
+            .details-text {
+                font-size: 1.24em;
+            }
+        }
+
+        /* ==================== КОНТАКТЫ ==================== */
+        #contacts {
+            padding: 80px 20px 70px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .contacts-container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .contacts-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.85em;
+            color: #2c2c2c;
+            margin-bottom: 22px;
+            letter-spacing: 3px;
+        }
+
+        .contacts-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.32em;
+            line-height: 1.55;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .contacts-phone {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45em;
+            color: #444;
+            margin-bottom: 48px;
+        }
+
+        .phone-link {
+            color: #2c2c2c;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .phone-link:hover {
+            color: #d4af77;
+        }
+
+        .telegram-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .telegram-circle {
+            width: 118px;
+            height: 118px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 14px;
+            transition: all 0.4s ease;
+        }
+
+        .telegram-wrapper:hover .telegram-circle {
+            transform: scale(1.08);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+        }
+
+        .telegram-icon {
+            width: 62px;
+            height: 62px;
+        }
+
+        .telegram-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15em;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            #contacts {
+                padding: 65px 20px 55px;
+            }
+
+            .contacts-title {
+                font-size: 2.5em;
+            }
+
+            .telegram-circle {
+                width: 102px;
+                height: 102px;
+            }
+
+            .telegram-icon {
+                width: 54px;
+                height: 54px;
+            }
+        }
+
+        /* ==================== ТАЙМЕР "ЖДЕМ ВСТРЕЧИ" ==================== */
+        #countdown {
+            padding: 10px 0px 10px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .countdown-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .countdown-greeting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.1em;
+            color: #2c2c2c;
+            margin-bottom: 10px;
+            line-height: 1.05;
+        }
+
+        .countdown-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45em;
+            letter-spacing: 4px;
+            color: #555;
+            margin-bottom: 45px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 70px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            text-align: center;
+            min-width: 78px;
+        }
+
+        .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.4em;
+            font-weight: 700;
+            color: #2c2c2c;
+            line-height: 1;
+            display: block;
+        }
+
+        .label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05em;
+            color: #777;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .separator {
+            font-size: 3.6em;
+            color: #d4af77;
+            font-weight: 300;
+            margin-top: -12px;
+        }
+
+        .countdown-photo {
+            max-width: 520px;
+        }
+
+        .hands-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 8px;
+            }
+
+            .number {
+                font-size: 3.6em;
+            }
+
+            .separator {
+                font-size: 2.9em;
+                margin-top: -8px;
+            }
+
+            .countdown-greeting {
+                font-size: 2.7em;
+            }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Станислав и Виктория</h1>
-    <p>30 августа 2026 года</p>
-    <button onclick="document.getElementById('place').scrollIntoView({behavior:'smooth'})">Подробнее</button>
-</header>
+<!-- ==================== РОМАНТИЧНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== -->
+<section id="memory">
+    <header>
+        <div class="hero-names">
+            <span class="name-left">Станислав</span>
+            <span class="plus-sign">+</span>
+            <span class="name-right">Виктория</span>
+        </div>
+        <h2>30.08.26</h2>
+    </header>
 
+    <div class="memory-decorative-container">
+        <!-- Декоративные линии сверху -->
+        <img src="./img/memory/lines_left_top.svg" alt="" class="decor-line left-line">
+        <img src="./img/memory/lines_right_top.svg" alt="" class="decor-line right-line">
+
+        <!-- Звёзды -->
+        <img src="./img/memory/stars.svg" alt="" class="decor-stars">
+
+        <!-- Основные фото -->
+        <div class="pure-photo-container">
+            <div class="pure-photo left">
+                <img src="img/img_ph/stas_young.png" alt="Станислав">
+                <div class="photo-label left-photo-label" data-text="Жених"></div>
+            </div>
+
+            <div class="pure-photo right">
+                <img src="img/img_ph/vika_young.png" alt="Виктория">
+                <div class="photo-label right-photo-label" data-text="Невеста"></div>
+            </div>
+        </div>
+
+        <!-- Декоративные элементы внизу -->
+        <img src="./img/memory/mail.png" alt="" class="decor-envelope">
+        <img src="./img/memory/rings.png" alt="" class="decor-rings">
+        <img src="./img/memory/heart.png" alt="" class="decor-heart">
+    </div>
+</section>
+
+<!-- ==================== НАША ИСТОРИЯ ==================== -->
+<section id="our-story">
+    <div class="story-container">
+        <p class="story-text top">Тогда мы и не подозревали что ...</p>
+
+        <div class="polaroid-frame">
+            <img src="./img/img_ph/we.png" alt="Станислав и Виктория">
+        </div>
+
+        <p class="story-text bottom">...будем счастливыми<br>мужем и женой</p>
+    </div>
+</section>
+
+<!-- ==================== МУЗЫКА ДЛЯ АТМОСФЕРЫ ==================== -->
+<section id="music">
+    <div class="music-container">
+        <div id="music-toggle" class="music-circle">
+            <!-- Иконка "Включено" -->
+            <svg id="speaker-on" class="speaker-icon" width="120" height="120" viewBox="0 0 24 24" fill="none"
+                 stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M15 9a4 4 0 010 6"/>
+                <path d="M19 7a8 8 0 010 10"/>
+            </svg>
+
+            <!-- Иконка "Выключено" (скрыта по умолчанию) -->
+            <svg id="speaker-off" class="speaker-icon hidden" width="120" height="120" viewBox="0 0 24 24" fill="none"
+                 stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M15 9a4 4 0 010 6"/>
+                <line x1="19" y1="7" x2="5" y2="19"/>
+            </svg>
+        </div>
+
+        <p class="music-text">включите музыку для атмосферы</p>
+    </div>
+</section>
+
+<!-- Аудио (скрытое) -->
+<audio id="wedding-audio" preload="auto" loop>
+    <source src="https://cdn.jsdelivr.net/gh/inviting-to/music@main/Alexsandr_and_natalia-05-09-25.mp3"
+            type="audio/mpeg">
+    <!-- Замени ссылку выше на свою песню, например: ./music/stas-vika-song.mp3 -->
+</audio>
+
+<!-- ==================== ПРИГЛАШЕНИЕ + КАЛЕНДАРЬ ==================== -->
+<section id="invitation">
+    <div class="invitation-container">
+        <h2 class="title">ДОРОГИЕ ДРУЗЬЯ И БЛИЗКИЕ!</h2>
+
+        <p class="main-text">
+            Мы будем счастливы разделить с Вами радость неповторимого для<br>
+            нас дня — дня нашей свадьбы!
+        </p>
+
+        <h3 class="month">АВГУСТ</h3>
+
+        <div class="calendar">
+            <div class="weekdays">
+                <div>пн</div>
+                <div>вт</div>
+                <div>ср</div>
+                <div>чт</div>
+                <div>пт</div>
+                <div>сб</div>
+                <div>вс</div>
+            </div>
+            <div class="dates" id="calendar-dates">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="date">1</div>
+                <div class="date">2</div>
+                <div class="date">3</div>
+                <div class="date">4</div>
+                <div class="date">5</div>
+                <div class="date">6</div>
+                <div class="date">7</div>
+                <div class="date">8</div>
+                <div class="date">9</div>
+                <div class="date">10</div>
+                <div class="date">11</div>
+                <div class="date">12</div>
+                <div class="date">13</div>
+                <div class="date">14</div>
+                <div class="date">15</div>
+                <div class="date">16</div>
+                <div class="date">17</div>
+                <div class="date">18</div>
+                <div class="date">19</div>
+                <div class="date">20</div>
+                <div class="date">21</div>
+                <div class="date">22</div>
+                <div class="date">23</div>
+                <div class="date">24</div>
+                <div class="date">25</div>
+                <div class="date">26</div>
+                <div class="date">27</div>
+                <div class="date">28</div>
+                <div class="date">29</div>
+                <div class="date special" id="special-date">
+                    30
+                    <img src="./img/img_ph/ring.png" alt="" class="ring" id="wedding-ring">
+                </div>
+                <div class="date">31</div>
+            </div>
+        </div>
+
+        <p class="bottom-text">
+            Приглашаем вас стать частью начала<br>нашей семейной истории!
+        </p>
+    </div>
+</section>
+
+<!-- ==================== ФОТО СТОЛА ==================== -->
+<section id="table">
+    <div class="story-container">
+        <div class="polaroid-frame">
+            <img src="./img/img_ph/table.png" alt="Свадебный стол">
+        </div>
+    </div>
+</section>
+
+<!-- ==================== МЕСТО ПРОВЕДЕНИЯ ==================== -->
 <section id="place">
-    <h2>Место проведения</h2>
-    <p>Усадьба <b>Royal Hall</b><br>Логойский р-н, д. Чуденичи, ул. Лесная, д. 2А</p>
-    <button id="openMap">На карте</button>
+    <div class="place-container">
+        <!-- Декоративный бант -->
+        <img src="./img/img_ph/bow.png" alt="" class="decorative-bow">
+
+        <h2 class="place-title">МЕСТО ПРОВЕДЕНИЯ</h2>
+
+        <h3 class="venue-name">Усадьба Royal Hall</h3>
+
+        <p class="place-address">
+            Логойский р-н, д. Чуденичи,<br>
+            ул. Лесная, д. 2А
+        </p>
+
+        <button id="openMap" class="place-button">
+            КАК ПРОЕХАТЬ
+        </button>
+    </div>
 </section>
 
 <div id="mapModal">
-    <div class="modal-content map-card">
+    <div class="modal-content">
         <button id="closeMap" class="close-btn">×</button>
 
         <div class="map-header">
@@ -499,121 +2344,282 @@
         </div>
 
         <div class="map-footer">
-            <a href="https://maps.google.com/?q=54.13783973622561,27.792074824663356" target="_blank">
-                Открыть в Google
+            <a href="https://maps.google.com/?q=54.13783973622561,27.792074824663356" target="_blank"
+               class="map-link-btn">
+                Открыть в Google Maps
             </a>
             <a href="https://yandex.by/maps/?ll=27.792453%2C54.137841&mode=search&sll=27.792075%2C54.137840&text=54.137840%2C27.792075&z=19.95"
-               target="_blank">
-                Открыть в Yandex
+               target="_blank" class="map-link-btn">
+                Открыть в Yandex Maps
             </a>
         </div>
     </div>
 </div>
 
+<!-- ==================== ПРОГРАММА ДНЯ ==================== -->
 <section id="schedule">
-    <h2>Расписание</h2>
-    <p>15:00 — Сбор гостей</p>
-    <p>16:00 — Выездная церемония</p>
-    <p>17:00 — Банкет</p>
-</section>
+    <div class="program-wrapper">
+        <h2 class="program-title">ПРОГРАММА ДНЯ</h2>
 
-<section>
-    <h2>Dress code</h2>
-    <p>Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы поддержите цветовую гамму нашей свадьбы.</p>
+        <div class="timeline-container" id="timeline-container">
+            <!-- SVG линия + сердечко -->
+            <svg id="timeline-svg" viewBox="85 0 340 235"
+                 preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 
-    <div id="dresscode">
-        <div class="color-palette">
-            <div class="color-item">
-                <div class="color-circle black"></div>
-                <span>Чёрный</span>
+                <!-- Добавили класс line-group, чтобы можно было управлять через CSS -->
+                <g class="line-group" transform="rotate(130 273 117.5)">
+                    <image
+                            href="./img/program_day/line.svg"
+                            width="546"
+                            height="235"
+                            preserveAspectRatio="none"/>
+                    <path id="timeline-path"
+                          d="M544.827 137.011C544.827 137.011 264.006 -48.9261 240.665 13.2052C217.324 75.3365 328.599 209.147 271.959 231.961C215.32 254.776 0.296875 94.3714 0.296875 94.3714"
+                          fill="none" stroke="transparent" stroke-width="0"/>
+                </g>
+
+                <image id="heart-pointer" href="./img/program_day/heart.svg" width="42" height="40"/>
+            </svg>
+
+            <!-- События (только классы, без inline-стилей) -->
+            <div class="event-item event-1">
+                <div class="event-icon"><img src="./img/program_day/banket.png.webp" alt=""></div>
+                <div class="event-time">16:00</div>
+                <div class="event-text">Сбор гостей</div>
             </div>
 
-            <div class="color-item">
-                <div class="color-circle half"></div>
-                <span>Чёрно-белый</span>
+            <div class="event-item event-2">
+                <div class="event-icon"><img src="./img/program_day/we.png.webp" alt=""></div>
+                <div class="event-time">16:30</div>
+                <div class="event-text">Торжественная церемония</div>
             </div>
 
-            <div class="color-item">
-                <div class="color-circle milk"></div>
-                <span>Молочный</span>
+            <div class="event-item event-3">
+                <div class="event-icon"><img src="./img/program_day/table.png.webp" alt=""></div>
+                <div class="event-time">17:00</div>
+                <div class="event-text">Начало банкета</div>
             </div>
 
-            <div class="color-item">
-                <div class="color-circle dark-choco"></div>
-                <span>Тёмный шоколад</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle milk-choco"></div>
-                <span>Молочный шоколад</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle beige"></div>
-                <span>Бежевый</span>
+            <div class="event-item event-4">
+                <div class="event-icon"><img src="./img/program_day/to_home.png.webp" alt=""></div>
+                <div class="event-time">23:00</div>
+                <div class="event-text">Завершение вечера</div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="details">
-    <h2>Детали & Пожелания</h2>
-    <p>1. Свои тёплые слова и пожелания приносите в сердцах, а подарки – в конверте.</p>
-    <p>2. Просим не обременять себя выбором цветов, Ваше присутствие скрасит этот день ярче любых букетов!</p>
-    <p>3. По всем вопросам Вы можете обращаться к нашему свадебному организатору.</p>
-    <p>Алеся +375447818283</p>
-    <button class="contact-btn" onclick="window.location.href='tel:+375447818283'">Связаться</button>
+<!-- ==================== DRESS CODE ==================== -->
+<section id="dresscode">
+    <div class="dresscode-container">
+        <h2 class="dresscode-title">Dress code</h2>
+        <p class="dresscode-desc">Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы
+            поддержите цветовую гамму нашей свадьбы.</p>
+
+        <!-- Цветовая палитра — теперь фото вместо цветов -->
+        <div class="color-palette" id="color-palette">
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color1.png" alt="Бежевый" class="color-circle">
+                <span>Бежевый</span>
+            </div>
+            <div class="color-item">
+                <img src="img/dresscode/colors/color2.png" alt="Чёрный" class="color-circle">
+                <span>Чёрный</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color3.png" alt="Тёмный шоколад" class="color-circle">
+                <span>Тёмный шоколад</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color4.png" alt="Чёрно-белый" class="color-circle">
+                <span>Чёрно-белый</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color5.png" alt="Молочный" class="color-circle">
+                <span>Молочный</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color6.png" alt="Серый" class="color-circle">
+                <span>Серый</span>
+            </div>
+        </div>
+
+        <!-- Галерея фото (с листанием и открытием в модалке) -->
+        <!-- Галерея фото — ОДНО фото + стрелки -->
+        <div class="photo-gallery">
+            <button class="gallery-arrow gallery-arrow-left" id="gallery-prev">‹</button>
+
+            <div class="gallery-slider" id="gallery-slider">
+                <div class="gallery-slides" id="gallery-slides">
+                    <img src="./img/dresscode/outfit1.png" alt="Образ 1" class="gallery-slide gallery-img">
+                    <img src="./img/dresscode/outfit2.png" alt="Образ 2" class="gallery-slide gallery-img">
+                    <img src="./img/dresscode/outfit3.png" alt="Образ 3" class="gallery-slide gallery-img">
+                    <!--                    <img src="./img/dresscode/outfit2.png" alt="Образ 4" class="gallery-slide gallery-img">-->
+                    <!--                    <img src="./img/dresscode/outfit1.png" alt="Образ 5" class="gallery-slide gallery-img">-->
+                </div>
+            </div>
+
+            <button class="gallery-arrow gallery-arrow-right" id="gallery-next">›</button>
+        </div>
+        <p class="dresscode-desc">Просим наших прекрасных девушек не выбирать белый цвет. В этот день это цвет
+            невесты.</p>
+    </div>
 </section>
 
+<!-- ==================== АНКЕТА ГОСТЯ ==================== -->
 <section id="rsvp">
-    <h2>Подтверждение участия</h2>
-    <form id="rsvpForm"
-          action="https://script.google.com/macros/s/AKfycbzYHA4Ve5GsN1Gyk64Uu-5WIQ8nbfUaANXB2tJB6Wtm6dTKpPVVZJ65pqetI80q1WngJA/exec"
-          method="POST">
-        <input type="text" name="Имя" placeholder="Ваше имя" required>
-        <input type="text" name="Фамилия" placeholder="Ваша фамилия" required>
-        <select name="Ответ" required>
-            <option value="Приду">С радостью приду!</option>
-            <option value="Не приду">К сожалению, не смогу</option>
-        </select>
-        <input type="number" name="Количество гостей" placeholder="Количество гостей" min="1">
-        <textarea name="Комментарий" rows="4" placeholder="Ваш комментарий (по желанию)"></textarea>
-        <button type="submit" class="submit">Отправить</button>
-    </form>
-    <p id="formMessage"></p>
+    <div class="rsvp-card">
+        <h2 class="rsvp-title">АНКЕТА ГОСТЯ</h2>
+        <p class="rsvp-subtitle">ПОЖАЛУЙСТА, ПОДТВЕРДИТЕ СВОЕ ПРИСУТСТВИЕ</p>
+
+        <form id="rsvpForm"
+              action="https://script.google.com/macros/s/AKfycbw8LSwAn8v9YtW765DIMdRXwsizOrnSdBnGuRlStT0AANFAXdtusxC3nVwroAhYGP6jGQ/exec"
+              method="POST">
+
+            <!-- Имя и фамилия -->
+            <div class="form-group">
+                <label>Ваше имя и фамилия</label>
+                <input type="text" name="Имя" placeholder="Введите имя и фамилию" required>
+            </div>
+
+            <!-- Присутствие -->
+            <div class="form-group">
+                <label>Планируете ли вы присутствовать?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="Ответ" value="Приду" required>
+                        <span>Да, буду</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="Ответ" value="Не приду">
+                        <span>Нет, не смогу</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Алкоголь -->
+            <div class="form-group">
+                <label>Ваши предпочтения по алкоголю?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="Алкоголь" value="шампанское"> шампанское</label>
+                    <label><input type="checkbox" name="Алкоголь" value="белое вино"> белое вино</label>
+                    <label><input type="checkbox" name="Алкоголь" value="красное вино"> красное вино</label>
+                    <label><input type="checkbox" name="Алкоголь" value="крепкие напитки"> крепкие напитки</label>
+                    <label><input type="checkbox" name="Алкоголь" value="безалкогольные"> безалкогольные напитки</label>
+                </div>
+            </div>
+
+            <!-- Аллергия -->
+            <div class="form-group">
+                <label>Есть ли у вас аллергии?</label>
+                <input type="text" name="Аллергии" placeholder="Укажите, если есть">
+            </div>
+
+            <button type="submit" class="rsvp-submit-btn">ОТПРАВИТЬ</button>
+        </form>
+    </div>
 </section>
 
-<section id="countdown" style="margin-bottom: 5cm;"></section>
+<!-- ==================== ДЕТАЛИ ==================== -->
+<section id="details">
+    <div class="details-container">
+        <img src="./img/details/details.png.webp" alt="Конверт" class="details-envelope">
+
+        <h2 class="details-title">ДЕТАЛИ</h2>
+
+        <p class="details-text">
+            Просим вас не дарить нам цветы — мы не успеем насладиться их красотой до отъезда.<br>
+            А вот бутылочку вина для нашей семейной винотеки будем очень рады!
+        </p>
+    </div>
+</section>
+
+<!-- ==================== КОНТАКТЫ ==================== -->
+<section id="contacts">
+    <div class="contacts-container">
+        <h2 class="contacts-title">КОНТАКТЫ</h2>
+
+        <p class="contacts-text">
+            По всем вопросам вы можете<br>обращаться к нашему организатору.
+        </p>
+
+        <p class="contacts-phone">
+            Алеся: <a href="tel:+375447818283" class="phone-link">+375 44 781 82 83</a>
+        </p>
+
+        <a href="https://t.me/valuyevaa" target="_blank" class="telegram-wrapper">
+            <div class="telegram-circle">
+                <img src="./img/contacts/telegram_icon.png.webp" alt="Telegram" class="telegram-icon">
+            </div>
+            <span class="telegram-label">telegram</span>
+        </a>
+    </div>
+</section>
+
+<!-- ==================== ТАЙМЕР "ЖДЕМ ВСТРЕЧИ" ==================== -->
+<section id="countdown">
+    <div class="countdown-container">
+        <p class="countdown-greeting">Ждем встречи<br>с вами!</p>
+
+        <h2 class="countdown-subtitle">МЫ СКАЖЕМ «ДА» ЧЕРЕЗ</h2>
+
+        <div class="countdown-timer" id="countdown-timer">
+            <div class="time-unit">
+                <span class="number" id="days">000</span>
+                <span class="label">дней</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="hours">00</span>
+                <span class="label">часа</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="minutes">00</span>
+                <span class="label">минут</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="seconds">00</span>
+                <span class="label">секунд</span>
+            </div>
+        </div>
+
+        <div class="countdown-photo">
+            <img src="./img/count/say_yes.png.webp" alt="Жених и невеста" class="hands-photo">
+        </div>
+    </div>
+</section>
 
 <script>
-    // Таймер
-    const countdown = document.getElementById('countdown');
-    const targetDate = new Date('2026-08-30T00:00:00');
+    // ==================== ТАЙМЕР В СТИЛЕ СКРИНШОТА ====================
+    const targetDate = new Date('2026-08-30T16:00:00');
 
     function updateCountdown() {
-        if (!countdown) return;
         const now = new Date();
         const diff = targetDate - now;
+
         if (diff <= 0) {
-            countdown.innerHTML = '<p>Сегодня наш особенный день!</p>';
+            document.getElementById('countdown-timer').innerHTML =
+                '<p style="font-size:2.2em;color:#2c2c2c;margin:30px 0;">Сегодня наш особенный день!</p>';
             return;
         }
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
-        countdown.innerHTML = `
-    <div class="time-box"><span>${days}</span>дней</div>
-    <div class="time-box"><span>${hours}</span>часов</div>
-    <div class="time-box"><span>${mins}</span>минут</div>
-    <div class="time-box"><span>${secs}</span>секунд</div>
-    `;
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('days').textContent = String(days).padStart(3, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }
 
-    updateCountdown(); // сразу при загрузке
+    updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Анимации
+    // Анимации секций
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -621,17 +2627,6 @@
         });
     }, {threshold: 0.2});
     sections.forEach(section => observer.observe(section));
-
-    // Модалка карты
-    const openMapBtn = document.getElementById('openMap');
-    const closeMapBtn = document.getElementById('closeMap');
-    const mapModal = document.getElementById('mapModal');
-
-    openMapBtn.addEventListener('click', () => mapModal.classList.add('show'));
-    closeMapBtn.addEventListener('click', () => mapModal.classList.remove('show'));
-    mapModal.addEventListener('click', (e) => {
-        if (e.target === mapModal) mapModal.classList.remove('show');
-    });
 
     // Форма RSVP
     document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
@@ -662,6 +2657,57 @@
         }
     });
 
+    // ==================== МОДАЛКА КАРТЫ (без расширения сайта) ====================
+    const mapModal = document.getElementById('mapModal');
+    const openMapBtn = document.getElementById('openMap');
+    const closeMapBtn = document.getElementById('closeMap');
+
+    let scrollPosition = 0;
+
+    function openModal() {
+        scrollPosition = window.scrollY;
+
+        // Правильная блокировка скролла без сдвига
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = '100%';
+        document.body.style.touchAction = 'none';   // дополнительно для мобильных
+
+        mapModal.classList.add('show');
+    }
+
+    function closeModal() {
+        mapModal.classList.remove('show');
+
+        // Возвращаем всё как было
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.touchAction = '';
+
+        window.scrollTo(0, scrollPosition);
+    }
+
+    // Открытие
+    openMapBtn.addEventListener('click', openModal);
+
+    // Закрытие
+    closeMapBtn.addEventListener('click', closeModal);
+    mapModal.addEventListener('click', (e) => {
+        if (e.target === mapModal) closeModal();
+    });
+
+    // Закрытие по кнопке "Назад" на некоторых мобильных браузерах
+    window.addEventListener('popstate', () => {
+        if (mapModal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
     function setMap(type, el) {
         const frame = document.getElementById('mapFrame');
         const buttons = document.querySelectorAll('.map-btn');
@@ -675,6 +2721,233 @@
             frame.src = "https://yandex.com/map-widget/v1/?ll=27.792074824663356%2C54.13783973622561&pt=27.792074824663356,54.13783973622561,pm2rdm&z=15";
         }
     }
+
+    // Анимация фото
+    const photoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 300);
+            }
+        });
+    }, {threshold: 0.3});
+
+    document.querySelectorAll('.pure-photo').forEach(photo => {
+        const rotate = photo.classList.contains('left') ? '-12deg' : '10deg';
+        photo.style.setProperty('--final-rotate', rotate);
+        photoObserver.observe(photo);
+    });
+
+    // ==================== МУЗЫКА ====================
+    const audio = document.getElementById('wedding-audio');
+    const toggleBtn = document.getElementById('music-toggle');
+    const speakerOn = document.getElementById('speaker-on');
+    const speakerOff = document.getElementById('speaker-off');
+
+    let isPlaying = false;
+
+    toggleBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            speakerOn.classList.remove('hidden');
+            speakerOff.classList.add('hidden');
+        } else {
+            audio.play().catch(() => {
+            }); // на случай блокировки автоплея
+            speakerOn.classList.add('hidden');
+            speakerOff.classList.remove('hidden');
+        }
+        isPlaying = !isPlaying;
+    });
+
+    // ==================== АНИМАЦИЯ КОЛЬЦА — СВОБОДНЫЙ СКРОЛЛ ====================
+    const specialDate = document.getElementById('special-date');
+
+    if (specialDate) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !specialDate.classList.contains('animate')) {
+
+                    // Просто запускаем анимацию — скролл остаётся полностью свободным
+                    specialDate.classList.add('animate');
+
+                    // Анимация запускается только один раз
+                    observer.unobserve(specialDate);
+                }
+            });
+        }, {
+            threshold: 0.85,           // можно менять от 0.7 до 0.95
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        observer.observe(specialDate);
+    }
+
+    // ==================== ПРОГРАММА ДНЯ — СЕРДЦЕ НЕ ДОХОДИТ ДО КРАЁВ ====================
+    const timelineContainer = document.getElementById('timeline-container');
+    const path = document.getElementById('timeline-path');
+    const heart = document.getElementById('heart-pointer');
+    const events = document.querySelectorAll('.event-item');
+
+    if (path && heart && timelineContainer) {
+        const pathLength = path.getTotalLength();
+        const cx = 273;
+        const cy = 117.5;
+
+        const triggerPoints = [0.90, 0.72, 0.52, 0.28];   // подвинул под новый диапазон
+
+        // === НАСТРОЙКИ ДИАПАЗОНА ДВИЖЕНИЯ СЕРДЦА ===
+        const minProgress = 0.0257;   // насколько отступить от начала линии
+        const maxProgress = 0.95;   // насколько не доходить до конца линии
+
+        function updateTimeline() {
+            const rect = timelineContainer.getBoundingClientRect();
+
+            let progress = 1 - (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 0.4);
+
+            // Ограничиваем прогресс — сердце не доходит до краёв
+            progress = Math.max(minProgress, Math.min(maxProgress, progress));
+
+            // Позиция сердца
+            const point = path.getPointAtLength(progress * pathLength);
+
+            const dx = point.x - cx;
+            const dy = point.y - cy;
+            const angle = 130 * Math.PI / 180;
+
+            const rotatedX = cx + (dx * Math.cos(angle) - dy * Math.sin(angle));
+            const rotatedY = cy + (dx * Math.sin(angle) + dy * Math.cos(angle));
+
+            heart.setAttribute('x', rotatedX - 21);
+            heart.setAttribute('y', rotatedY - 20);
+
+            // Видимость событий зависит только от положения сердца
+            events.forEach((event, index) => {
+                if (progress <= triggerPoints[index]) {
+                    event.classList.add('visible');
+                } else {
+                    event.classList.remove('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateTimeline, {passive: true});
+        window.addEventListener('resize', updateTimeline);
+        setTimeout(updateTimeline, 400);
+    }
+
+    // ==================== DRESSCODE: ЦВЕТА + СЛАЙДЕР + LIGHTBOX (с блокировкой скролла) ====================
+
+    // 1. Анимация появления цветовых фото
+    const colorItems = document.querySelectorAll('#color-palette .color-item');
+    if (colorItems.length) {
+        const colorObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 120);
+                }
+            });
+        }, {threshold: 0.4});
+        colorItems.forEach(item => colorObserver.observe(item));
+    }
+
+    // 2. Слайдер + Lightbox с блокировкой скролла
+    let currentIndex = 0;
+    const slidesContainer = document.getElementById('gallery-slides');
+    const slides = document.querySelectorAll('.gallery-slide');
+    const totalSlides = slides.length;
+
+    let lightboxScrollPosition = 0;
+
+    function showSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-image');
+        if (!lightbox || !lightboxImg) return;
+
+        lightboxScrollPosition = window.scrollY;
+
+        // Блокировка скролла (точно как в #mapModal)
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${lightboxScrollPosition}px`;
+        document.body.style.width = '100%';
+        document.body.style.touchAction = 'none';
+
+        lightboxImg.src = src;
+        lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox) return;
+
+        lightbox.classList.remove('show');
+
+        // Разблокировка скролла
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.touchAction = '';
+
+        window.scrollTo(0, lightboxScrollPosition);
+    }
+
+    function initDresscode() {
+        const prevBtn = document.getElementById('gallery-prev');
+        const nextBtn = document.getElementById('gallery-next');
+
+        // Стрелки слайдера
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+        }
+
+        // Создаём lightbox (если ещё нет)
+        let lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.innerHTML = `
+                <span id="lightbox-close">×</span>
+                <img id="lightbox-image" src="" alt="">
+            `;
+            document.body.appendChild(lightbox);
+        }
+
+        const lightboxImg = document.getElementById('lightbox-image');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        // Клик по фото → открытие
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                openLightbox(img.src);
+            });
+        });
+
+        // Закрытие
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        showSlide(0);
+        console.log('✅ Слайдер + Lightbox с блокировкой скролла готовы');
+    }
+
+    // Запускаем
+    window.addEventListener('load', initDresscode);
 </script>
 </body>
 </html>
