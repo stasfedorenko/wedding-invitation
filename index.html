@@ -294,6 +294,68 @@
             }
         }
 
+        /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+        .memory-decorative-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
+        }
+
+        .decor-line {
+            position: absolute;
+            width: 80px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+            z-index: 1;
+        }
+
+        .left-line {
+            top: 40px;
+            left: 0;
+        }
+
+        .right-line {
+            top: 400px;
+            right: 40px;
+            transform: rotate(12deg);
+        }
+
+        .decor-stars {
+            position: absolute;
+            top: 0;
+            left: 80%;
+            transform: translateX(-50%);
+            width: 30%;
+            opacity: 0.65;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .decor-envelope {
+            position: absolute;
+            bottom: 195px;
+            left: 5%;
+            width: 20%;
+            z-index: 3;
+        }
+
+        .decor-rings {
+            position: absolute;
+            bottom: 150px;
+            left: 30%;
+            width: 15%;
+            z-index: 3;
+        }
+
+        .decor-heart {
+            position: absolute;
+            bottom: 20px;
+            left: 10%;
+            width: 20%;
+            z-index: 3;
+            transform: rotate(-12deg);
+        }
+
         /* ==================== МОБИЛЬНАЯ ВЕРСИЯ — ФОТО + ПОДПИСИ ==================== */
         @media (max-width: 768px) {
             .hero-names {
@@ -384,6 +446,68 @@
                 left: 40%;
                 bottom: 80px;
                 transform: translateX(-50%) rotate(6deg);
+            }
+
+            /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+            .memory-decorative-container {
+                position: relative;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 20px 20px 0;
+            }
+
+            .decor-line {
+                position: absolute;
+                width: 10%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+                z-index: 1;
+            }
+
+            .left-line {
+                top: 65px;
+                left: 15px;
+            }
+
+            .right-line {
+                top: 410px;
+                right: 40px;
+                transform: rotate(12deg);
+            }
+
+            .decor-stars {
+                position: absolute;
+                top: 0;
+                left: 80%;
+                transform: translateX(-50%);
+                width: 30%;
+                opacity: 0.65;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .decor-envelope {
+                position: absolute;
+                bottom: 395px;
+                left: 5%;
+                width: 20%;
+                z-index: 3;
+            }
+
+            .decor-rings {
+                position: absolute;
+                bottom: 210px;
+                left: 70%;
+                width: 15%;
+                z-index: 3;
+            }
+
+            .decor-heart {
+                position: absolute;
+                bottom: 160px;
+                left: 10%;
+                width: 20%;
+                z-index: 3;
+                transform: rotate(-12deg);
             }
         }
 
@@ -477,6 +601,68 @@
                 left: 40%;
                 bottom: 60px;
                 transform: translateX(-50%) rotate(6deg);
+            }
+
+            /* ==================== ДЕКОРАТИВНЫЙ БЛОК ВОСПОМИНАНИЯ ==================== */
+            .memory-decorative-container {
+                position: relative;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 20px 20px 0;
+            }
+
+            .decor-line {
+                position: absolute;
+                width: 10%;
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+                z-index: 1;
+            }
+
+            .left-line {
+                top: 65px;
+                left: 15px;
+            }
+
+            .right-line {
+                top: 330px;
+                right: 30px;
+                transform: rotate(12deg);
+            }
+
+            .decor-stars {
+                position: absolute;
+                top: 0;
+                left: 80%;
+                transform: translateX(-50%);
+                width: 30%;
+                opacity: 0.65;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .decor-envelope {
+                position: absolute;
+                bottom: 195px;
+                left: 5%;
+                width: 20%;
+                z-index: 3;
+            }
+
+            .decor-rings {
+                position: absolute;
+                bottom: 110px;
+                left: 70%;
+                width: 15%;
+                z-index: 3;
+            }
+
+            .decor-heart {
+                position: absolute;
+                bottom: 60px;
+                left: 10%;
+                width: 20%;
+                z-index: 3;
+                transform: rotate(-12deg);
             }
         }
 
@@ -1962,8 +2148,15 @@
         <h2>30.08.26</h2>
     </header>
 
-    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-        <!-- ← Вот эта обёртка была пропущена -->
+    <div class="memory-decorative-container">
+        <!-- Декоративные линии сверху -->
+        <img src="./img/memory/lines_left_top.svg" alt="" class="decor-line left-line">
+        <img src="./img/memory/lines_right_top.svg" alt="" class="decor-line right-line">
+
+        <!-- Звёзды -->
+        <img src="./img/memory/stars.svg" alt="" class="decor-stars">
+
+        <!-- Основные фото -->
         <div class="pure-photo-container">
             <div class="pure-photo left">
                 <img src="img/img_ph/stas_young.png" alt="Станислав">
@@ -1976,6 +2169,10 @@
             </div>
         </div>
 
+        <!-- Декоративные элементы внизу -->
+        <img src="./img/memory/mail.png" alt="" class="decor-envelope">
+        <img src="./img/memory/rings.png" alt="" class="decor-rings">
+        <img src="./img/memory/heart.png" alt="" class="decor-heart">
     </div>
 </section>
 
