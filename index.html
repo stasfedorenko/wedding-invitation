@@ -459,11 +459,39 @@
             border-radius: 15px;
         }
 
-        #mapModal .map-footer {
+        /* ==================== КНОПКИ В ФУТЕРЕ МОДАЛКИ ==================== */
+        .map-footer {
             display: flex;
-            justify-content: space-between;
-            padding: 15px 32px 25px;
-            font-size: 1.05em;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            padding: 28px 30px 32px;
+            background: #f9f7f2;
+        }
+
+        .map-link-btn {
+            flex: 1;
+            min-width: 225px;
+            padding: 16px 34px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2c2c2c;
+            background: #f5f1e8;
+            border: 2.5px solid #d4af77;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.35s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-link-btn:hover {
+            background: #d4af77;
+            color: #2c2c2c;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(212, 175, 119, 0.4);
         }
 
         #mapModal .map-footer a {
@@ -991,6 +1019,166 @@
             }
         }
 
+        /* ==================== ПРОГРАММА ДНЯ ==================== */
+        #schedule {
+            padding: 30px 20px 30px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .program-wrapper {
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        .program-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.9em;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .timeline-container {
+            position: relative;
+            margin-top: -100px;
+        }
+
+        #timeline-svg {
+            display: block;
+            margin-bottom: -220px;
+        }
+
+        #heart-pointer {
+            transition: transform 0.1s linear;
+        }
+
+        /* ==================== АНИМАЦИЯ СОБЫТИЙ В TIMELINE ==================== */
+        .event-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px) scale(0.82);
+            transition: all 0.95s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+
+        .event-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .event-icon img {
+            width: 68px;
+            height: 68px;
+            object-fit: contain;
+        }
+
+        .event-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.65em;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin: 8px 0 4px;
+        }
+
+        .event-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25em;
+            color: #555;
+            text-align: center;
+            max-width: 180px;
+        }
+
+        #timeline-svg {
+            width: 100%;
+            height: 1020px;
+            display: block;
+            margin-bottom: -100px;
+        }
+
+        /* ==================== ПОЗИЦИИ НА КОМПЬЮТЕРЕ ==================== */
+        .event-1 {
+            top: 10%;
+            left: 10%;
+        }
+
+        .event-2 {
+            top: 25%;
+            right: 10%;
+        }
+
+        .event-3 {
+            top: 55%;
+            left: 8%;
+        }
+
+        .event-4 {
+            top: 75%;
+            right: 10%;
+        }
+
+        /* ==================== АДАПТИВ ДЛЯ МОБИЛКИ ==================== */
+        @media (max-width: 768px) {
+            #schedule {
+                padding: 10px 0 10px; /* уменьшили отступы */
+            }
+
+            .program-wrapper {
+                max-width: 100%;
+                padding: 0 0;
+            }
+
+            .program-title {
+                font-size: 2.4em;
+                margin-bottom: 35px;
+            }
+
+            #timeline-svg {
+                height: 680px; /* оптимальная высота для телефона */
+                margin-bottom: -100px;
+            }
+
+            .event-item {
+                width: 160px;
+            }
+
+            /* Позиции событий на телефоне */
+            .event-1 {
+                top: 10%;
+                left: 8%;
+            }
+
+            .event-2 {
+                top: 25%;
+                right: 3%;
+            }
+
+            .event-3 {
+                top: 50%;
+                left: 8%;
+            }
+
+            .event-4 {
+                top: 70%;
+                right: 3%;
+            }
+
+            .event-icon img {
+                width: 54px;
+                height: 54px;
+            }
+
+            .event-time {
+                font-size: 1.45em;
+            }
+
+            .event-text {
+                font-size: 1.1em;
+                max-width: 140px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1191,22 +1379,69 @@
         </div>
 
         <div class="map-footer">
-            <a href="https://maps.google.com/?q=54.13783973622561,27.792074824663356" target="_blank">
-                Открыть в Google
+            <a href="https://maps.google.com/?q=54.13783973622561,27.792074824663356" target="_blank"
+               class="map-link-btn">
+                Открыть в Google Maps
             </a>
             <a href="https://yandex.by/maps/?ll=27.792453%2C54.137841&mode=search&sll=27.792075%2C54.137840&text=54.137840%2C27.792075&z=19.95"
-               target="_blank">
-                Открыть в Yandex
+               target="_blank" class="map-link-btn">
+                Открыть в Yandex Maps
             </a>
         </div>
     </div>
 </div>
 
+<!-- ==================== ПРОГРАММА ДНЯ ==================== -->
 <section id="schedule">
-    <h2>Расписание</h2>
-    <p>15:00 — Сбор гостей</p>
-    <p>16:00 — Выездная церемония</p>
-    <p>17:00 — Банкет</p>
+    <div class="program-wrapper">
+        <h2 class="program-title">ПРОГРАММА ДНЯ</h2>
+
+        <div class="timeline-container" id="timeline-container">
+            <!-- SVG линия + сердечко -->
+            <svg id="timeline-svg" viewBox="85 0 340 235"
+                 preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+
+                <!-- Добавили класс line-group, чтобы можно было управлять через CSS -->
+                <g class="line-group" transform="rotate(130 273 117.5)">
+                    <image
+                            href="./img/program_day/line.svg"
+                            width="546"
+                            height="235"
+                            preserveAspectRatio="none"/>
+                    <path id="timeline-path"
+                          d="M544.827 137.011C544.827 137.011 264.006 -48.9261 240.665 13.2052C217.324 75.3365 328.599 209.147 271.959 231.961C215.32 254.776 0.296875 94.3714 0.296875 94.3714"
+                          fill="none" stroke="transparent" stroke-width="0"/>
+                </g>
+
+                <image id="heart-pointer" href="./img/program_day/heart.svg" width="42" height="40"/>
+            </svg>
+
+            <!-- События (только классы, без inline-стилей) -->
+            <div class="event-item event-1">
+                <div class="event-icon"><img src="./img/program_day/banket.png.webp" alt=""></div>
+                <div class="event-time">16:00</div>
+                <div class="event-text">Сбор гостей</div>
+            </div>
+
+            <div class="event-item event-2">
+                <div class="event-icon"><img src="./img/program_day/we.png.webp" alt=""></div>
+                <div class="event-time">16:30</div>
+                <div class="event-text">Торжественная церемония</div>
+            </div>
+
+            <div class="event-item event-3">
+                <div class="event-icon"><img src="./img/program_day/table.png.webp" alt=""></div>
+                <div class="event-time">17:00</div>
+                <div class="event-text">Начало банкета</div>
+            </div>
+
+            <div class="event-item event-4">
+                <div class="event-icon"><img src="./img/program_day/to_home.png.webp" alt=""></div>
+                <div class="event-time">23:00</div>
+                <div class="event-text">Завершение вечера</div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section>
@@ -1471,19 +1706,58 @@
         observer.observe(specialDate);
     }
 
-    // ==================== ОТКРЫВАТЬ СТРАНИЦУ С САМОГО ВЕРХА ПРИ ОБНОВЛЕНИИ ====================
-    window.addEventListener('load', () => {
-        // Мгновенно скроллим в самый верх при загрузке и обновлении страницы
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'instant'
-        });
+    // ==================== ПРОГРАММА ДНЯ — СЕРДЦЕ НЕ ДОХОДИТ ДО КРАЁВ ====================
+    const timelineContainer = document.getElementById('timeline-container');
+    const path = document.getElementById('timeline-path');
+    const heart = document.getElementById('heart-pointer');
+    const events = document.querySelectorAll('.event-item');
 
-        // Дополнительная страховка для некоторых браузеров
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    });
+    if (path && heart && timelineContainer) {
+        const pathLength = path.getTotalLength();
+        const cx = 273;
+        const cy = 117.5;
+
+        const triggerPoints = [0.90, 0.72, 0.52, 0.28];   // подвинул под новый диапазон
+
+        // === НАСТРОЙКИ ДИАПАЗОНА ДВИЖЕНИЯ СЕРДЦА ===
+        const minProgress = 0.0257;   // насколько отступить от начала линии
+        const maxProgress = 0.95;   // насколько не доходить до конца линии
+
+        function updateTimeline() {
+            const rect = timelineContainer.getBoundingClientRect();
+
+            let progress = 1 - (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 0.4);
+
+            // Ограничиваем прогресс — сердце не доходит до краёв
+            progress = Math.max(minProgress, Math.min(maxProgress, progress));
+
+            // Позиция сердца
+            const point = path.getPointAtLength(progress * pathLength);
+
+            const dx = point.x - cx;
+            const dy = point.y - cy;
+            const angle = 130 * Math.PI / 180;
+
+            const rotatedX = cx + (dx * Math.cos(angle) - dy * Math.sin(angle));
+            const rotatedY = cy + (dx * Math.sin(angle) + dy * Math.cos(angle));
+
+            heart.setAttribute('x', rotatedX - 21);
+            heart.setAttribute('y', rotatedY - 20);
+
+            // Видимость событий зависит только от положения сердца
+            events.forEach((event, index) => {
+                if (progress <= triggerPoints[index]) {
+                    event.classList.add('visible');
+                } else {
+                    event.classList.remove('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateTimeline, {passive: true});
+        window.addEventListener('resize', updateTimeline);
+        setTimeout(updateTimeline, 400);
+    }
 </script>
 </body>
 </html>
