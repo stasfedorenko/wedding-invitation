@@ -1365,6 +1365,150 @@
                 max-width: 140px;
             }
         }
+
+        /* ==================== АНКЕТА ГОСТЯ ==================== */
+        #rsvp {
+            padding: 10px 0 10px;
+            background: #f9f7f2;
+        }
+
+        .rsvp-card {
+            max-width: 620px;
+            margin: 0 auto;
+            background: #e9e1d6;
+            border-radius: 24px;
+            padding: 45px 30px 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        .rsvp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7em;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+        }
+
+        .rsvp-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 22px; /* уменьшили отступы */
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.18em;
+            margin-bottom: 9px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 2px solid #d4af77;
+            background: transparent;
+            font-size: 1.1em;
+            outline: none;
+        }
+
+        /* ==================== RADIO И CHECKBOX — ИДЕАЛЬНОЕ ЦЕНТРИРОВАНИЕ ==================== */
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center;        /* главное выравнивание */
+            gap: 10px;
+            font-size: 1.22em;
+            cursor: pointer;
+            padding: 4px 0;
+            min-height: 32px;           /* стабильная высота */
+        }
+
+        .radio-group label input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            flex-shrink: 0;             /* не сжимается */
+            width: 26px;
+            height: 26px;
+            margin: 0;
+            accent-color: #2c2c2c;
+        }
+
+        .radio-group label span,
+        .checkbox-group label span {
+            line-height: 1.1;           /* текст не съезжает вниз */
+            padding-top: 1px;
+        }
+
+        /* Кнопка */
+        .rsvp-submit-btn {
+            margin-top: 15px;
+            padding: 18px 70px;
+            background: #2c2c2c;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .rsvp-submit-btn:hover {
+            background: #d4af77;
+            color: #2c2c2c;
+        }
+
+        /* ==================== МОБИЛЬНАЯ ВЕРСИЯ — ЕЩЁ КОМПАКТНЕЕ ==================== */
+        @media (max-width: 768px) {
+            .rsvp-card {
+                padding: 38px 25px 30px;
+            }
+
+            .rsvp-title {
+                font-size: 2.35em;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                font-size: 1.22em;
+            }
+
+            .radio-label,
+            .checkbox-group label {
+                font-size: 1.22em;
+                gap: 16px;
+            }
+
+            .radio-label input[type="radio"],
+            .checkbox-group input[type="checkbox"] {
+                width: 30px;
+                height: 30px;
+            }
+
+            .rsvp-submit-btn {
+                padding: 16px 80px;
+                font-size: 1.3em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1696,23 +1840,78 @@
     <button class="contact-btn" onclick="window.location.href='tel:+375447818283'">Связаться</button>
 </section>
 
+<!--<><section id="rsvp">-->
+<!--    <h2>Подтверждение участия</h2>-->
+<!--    <form id="rsvpForm"-->
+<!--          action="https://script.google.com/macros/s/AKfycbzYHA4Ve5GsN1Gyk64Uu-5WIQ8nbfUaANXB2tJB6Wtm6dTKpPVVZJ65pqetI80q1WngJA/exec"-->
+<!--          method="POST">-->
+<!--        <input type="text" name="Имя" placeholder="Ваше имя" required>-->
+<!--        <input type="text" name="Фамилия" placeholder="Ваша фамилия" required>-->
+<!--        <select name="Ответ" required>-->
+<!--            <option value="Приду">С радостью приду!</option>-->
+<!--            <option value="Не приду">К сожалению, не смогу</option>-->
+<!--        </select>-->
+<!--        <input type="number" name="Количество гостей" placeholder="Количество гостей" min="1">-->
+<!--        <textarea name="Комментарий" rows="4" placeholder="Ваш комментарий (по желанию)"></textarea>-->
+<!--        <button type="submit" class="submit">Отправить</button>-->
+<!--    </form>-->
+<!--    <p id="formMessage"></p>-->
+<!--</section></>-->
+
+<!-- ==================== АНКЕТА ГОСТЯ ==================== -->
 <section id="rsvp">
-    <h2>Подтверждение участия</h2>
-    <form id="rsvpForm"
-          action="https://script.google.com/macros/s/AKfycbzYHA4Ve5GsN1Gyk64Uu-5WIQ8nbfUaANXB2tJB6Wtm6dTKpPVVZJ65pqetI80q1WngJA/exec"
-          method="POST">
-        <input type="text" name="Имя" placeholder="Ваше имя" required>
-        <input type="text" name="Фамилия" placeholder="Ваша фамилия" required>
-        <select name="Ответ" required>
-            <option value="Приду">С радостью приду!</option>
-            <option value="Не приду">К сожалению, не смогу</option>
-        </select>
-        <input type="number" name="Количество гостей" placeholder="Количество гостей" min="1">
-        <textarea name="Комментарий" rows="4" placeholder="Ваш комментарий (по желанию)"></textarea>
-        <button type="submit" class="submit">Отправить</button>
-    </form>
-    <p id="formMessage"></p>
+    <div class="rsvp-card">
+        <h2 class="rsvp-title">АНКЕТА ГОСТЯ</h2>
+        <p class="rsvp-subtitle">ПОЖАЛУЙСТА, ПОДТВЕРДИТЕ СВОЕ ПРИСУТСТВИЕ</p>
+
+        <form id="rsvpForm"
+              action="https://script.google.com/macros/s/AKfycbw8LSwAn8v9YtW765DIMdRXwsizOrnSdBnGuRlStT0AANFAXdtusxC3nVwroAhYGP6jGQ/exec"
+              method="POST">
+
+            <!-- Имя и фамилия -->
+            <div class="form-group">
+                <label>Ваше имя и фамилия</label>
+                <input type="text" name="Имя" placeholder="Введите имя и фамилию" required>
+            </div>
+
+            <!-- Присутствие -->
+            <div class="form-group">
+                <label>Планируете ли вы присутствовать?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="Ответ" value="Приду" required>
+                        <span>Да, буду</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="Ответ" value="Не приду">
+                        <span>Нет, не смогу</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Алкоголь -->
+            <div class="form-group">
+                <label>Ваши предпочтения по алкоголю?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="Алкоголь" value="шампанское"> шампанское</label>
+                    <label><input type="checkbox" name="Алкоголь" value="белое вино"> белое вино</label>
+                    <label><input type="checkbox" name="Алкоголь" value="красное вино"> красное вино</label>
+                    <label><input type="checkbox" name="Алкоголь" value="крепкие напитки"> крепкие напитки</label>
+                    <label><input type="checkbox" name="Алкоголь" value="безалкогольные"> безалкогольные напитки</label>
+                </div>
+            </div>
+
+            <!-- Аллергия -->
+            <div class="form-group">
+                <label>Есть ли у вас аллергии?</label>
+                <input type="text" name="Аллергии" placeholder="Укажите, если есть">
+            </div>
+
+            <button type="submit" class="rsvp-submit-btn">ОТПРАВИТЬ</button>
+        </form>
+    </div>
 </section>
+
 
 <section id="countdown" style="margin-bottom: 5cm;"></section>
 
@@ -1963,8 +2162,6 @@
     }
 
     // ==================== DRESSCODE: ЦВЕТА + СЛАЙДЕР + LIGHTBOX (с блокировкой скролла) ====================
-
-    console.log('🎨 Dresscode JS загружен');
 
     // 1. Анимация появления цветовых фото
     const colorItems = document.querySelectorAll('#color-palette .color-item');
