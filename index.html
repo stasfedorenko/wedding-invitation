@@ -371,11 +371,6 @@
             }
         }
 
-        @media (max-width: 480px) {
-            #mapModal .map-container iframe {
-            }
-        }
-
         /* Остальные стили модалки */
         #mapModal .close-btn {
             position: absolute;
@@ -505,70 +500,261 @@
             color: #d4af77;
         }
 
-        /* === DRESSCODE — ЦВЕТОВАЯ ПАЛИТРА === */
+        /* ==================== DRESS CODE — СТИЛЬ TILDA ==================== */
+
         #dresscode {
-            margin: 40px 0;
+            padding: 40px 20px 0;
         }
 
+        .dresscode-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 0;
+            text-align: center;
+        }
+
+        .dresscode-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.9em;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .dresscode-desc {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.75em;
+            color: #555;
+            max-width: 720px;
+            margin: 0 auto 50px;
+        }
+
+        /* ==================== COLOR PALETTE — ГОРИЗОНТАЛЬНОЕ РАСПОЛОЖЕНИЕ ==================== */
         .color-palette {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Центрирование по горизонтали */
-            gap: 35px 25px; /* Отступ между элементами */
-            max-width: 900px;
-            margin: 35px auto 0;
-            padding: 0 15px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 45px 35px;
+            max-width: 1100px;
+            margin: 40px auto 70px;
+            padding: 0 20px;
         }
 
-        /* Карточка с цветом */
         .color-item {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Центрирование содержимого внутри */
-            width: 110px; /* Фиксированная ширина для ровного вида */
-            font-size: 0.88em;
-            color: #555;
+            align-items: center;
+            width: 140px; /* базовая ширина */
+            flex-shrink: 0;
         }
 
-        /* Круг с цветом */
         .color-circle {
-            width: 68px;
-            height: 68px;
+            width: 98px;
+            height: 98px;
             border-radius: 50%;
-            margin-bottom: 12px;
-            border: 4px solid #f8f8f8;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 14px;
+            object-fit: cover;
+            border: 6px solid #f9f7f2;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
             transition: all 0.3s ease;
         }
 
         .color-circle:hover {
-            transform: scale(1.12);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
         }
 
-        /* Цвета */
-        .black {
-            background: #000;
+        .color-item span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.50em;
+            color: #444;
+            text-align: center;
         }
 
-        .half {
-            background: linear-gradient(to right, #000 50%, #fff 50%);
+        /* ==================== АДАПТИВ ==================== */
+
+        /* Мобильные — 2 в ряд */
+        @media (max-width: 768px) {
+            .color-palette {
+                gap: 38px 0px;
+            }
+
+            .color-item {
+                width: 40%; /* ≈ 2 в ряд */
+            }
+
+            .color-circle {
+                width: 88px;
+                height: 88px;
+            }
         }
 
-        .milk {
-            background: #f5f1ea;
+        /* Планшет и небольшие ноутбуки — 3 в ряд */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .color-item {
+                width: 30%;
+            }
         }
 
-        .dark-choco {
-            background: #3e2723;
+        /* Широкие экраны — 3 в ряд с большим пространством */
+        @media (min-width: 1025px) {
+            .color-item {
+                width: 28%;
+            }
         }
 
-        .milk-choco {
-            background: #a47551;
+        .photo-gallery {
+            position: relative;
+            max-width: 100%;
+            margin: 40px auto 0;
+            min-height: 380px;
+            padding-bottom: 20px;
         }
 
-        .beige {
-            background: #d8c3a5;
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-slide {
+            width: 100%;
+            flex-shrink: 0;
+            height: auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            background: rgba(44, 44, 44, 0.9);
+            color: white;
+            border: none;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-arrow:hover {
+            background: #2c2c2c;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-arrow-left {
+            left: -10px;
+        }
+
+        .gallery-arrow-right {
+            right: -10px;
+        }
+
+        /* Адаптив */
+        @media (max-width: 480px) {
+            .gallery-slider {
+                max-width: 92%;
+            }
+
+            .gallery-arrow {
+                width: 46px;
+                height: 46px;
+                font-size: 26px;
+            }
+        }
+
+        /* Адаптив */
+        @media (max-width: 480px) {
+            .color-circle {
+                width: 68px;
+                height: 68px;
+            }
+
+            .gallery-track img {
+                width: 240px;
+            }
+        }
+
+        /* ==================== LIGHTBOX — ПО АНАЛОГИИ С #mapModal ==================== */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        #lightbox.show {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-width: 100%;
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        #lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 48px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 100001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+        }
+
+        /* Мобильная версия — максимально жёстко */
+        @media {
+            #lightbox {
+                max-height: 100%;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            #lightbox-image {
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+            #lightbox-close {
+                top: 18px;
+                right: 18px;
+                font-size: 42px;
+                width: 52px;
+                height: 52px;
+            }
         }
 
         /* Адаптив — на очень широких экранах помещается больше */
@@ -1444,43 +1630,60 @@
     </div>
 </section>
 
-<section>
-    <h2>Dress code</h2>
-    <p>Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы поддержите цветовую гамму
-        нашей свадьбы.</p>
+<!-- ==================== DRESS CODE ==================== -->
+<section id="dresscode">
+    <div class="dresscode-container">
+        <h2 class="dresscode-title">Dress code</h2>
+        <p class="dresscode-desc">Мы очень старались сделать праздник красивым и будем рады, если в своих нарядах вы
+            поддержите цветовую гамму нашей свадьбы.</p>
 
-    <div id="dresscode">
-        <div class="color-palette">
+        <!-- Цветовая палитра — теперь фото вместо цветов -->
+        <div class="color-palette" id="color-palette">
             <div class="color-item">
-                <div class="color-circle black"></div>
-                <span>Чёрный</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle half"></div>
-                <span>Чёрно-белый</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle milk"></div>
-                <span>Молочный</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle dark-choco"></div>
-                <span>Тёмный шоколад</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle milk-choco"></div>
-                <span>Молочный шоколад</span>
-            </div>
-
-            <div class="color-item">
-                <div class="color-circle beige"></div>
+                <img src="./img/dresscode/colors/color1.png" alt="Бежевый" class="color-circle">
                 <span>Бежевый</span>
             </div>
+            <div class="color-item">
+                <img src="img/dresscode/colors/color2.png" alt="Чёрный" class="color-circle">
+                <span>Чёрный</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color3.png" alt="Тёмный шоколад" class="color-circle">
+                <span>Тёмный шоколад</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color4.png" alt="Чёрно-белый" class="color-circle">
+                <span>Чёрно-белый</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color5.png" alt="Молочный" class="color-circle">
+                <span>Молочный</span>
+            </div>
+            <div class="color-item">
+                <img src="./img/dresscode/colors/color6.png" alt="Серый" class="color-circle">
+                <span>Серый</span>
+            </div>
         </div>
+
+        <!-- Галерея фото (с листанием и открытием в модалке) -->
+        <!-- Галерея фото — ОДНО фото + стрелки -->
+        <div class="photo-gallery">
+            <button class="gallery-arrow gallery-arrow-left" id="gallery-prev">‹</button>
+
+            <div class="gallery-slider" id="gallery-slider">
+                <div class="gallery-slides" id="gallery-slides">
+                    <img src="./img/dresscode/outfit1.png" alt="Образ 1" class="gallery-slide gallery-img">
+                    <img src="./img/dresscode/outfit2.png" alt="Образ 2" class="gallery-slide gallery-img">
+                    <img src="./img/dresscode/outfit3.png" alt="Образ 3" class="gallery-slide gallery-img">
+                    <!--                    <img src="./img/dresscode/outfit2.png" alt="Образ 4" class="gallery-slide gallery-img">-->
+                    <!--                    <img src="./img/dresscode/outfit1.png" alt="Образ 5" class="gallery-slide gallery-img">-->
+                </div>
+            </div>
+
+            <button class="gallery-arrow gallery-arrow-right" id="gallery-next">›</button>
+        </div>
+        <p class="dresscode-desc">Просим наших прекрасных девушек не выбирать белый цвет. В этот день это цвет
+            невесты.</p>
     </div>
 </section>
 
@@ -1758,6 +1961,120 @@
         window.addEventListener('resize', updateTimeline);
         setTimeout(updateTimeline, 400);
     }
+
+    // ==================== DRESSCODE: ЦВЕТА + СЛАЙДЕР + LIGHTBOX (с блокировкой скролла) ====================
+
+    console.log('🎨 Dresscode JS загружен');
+
+    // 1. Анимация появления цветовых фото
+    const colorItems = document.querySelectorAll('#color-palette .color-item');
+    if (colorItems.length) {
+        const colorObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 120);
+                }
+            });
+        }, {threshold: 0.4});
+        colorItems.forEach(item => colorObserver.observe(item));
+    }
+
+    // 2. Слайдер + Lightbox с блокировкой скролла
+    let currentIndex = 0;
+    const slidesContainer = document.getElementById('gallery-slides');
+    const slides = document.querySelectorAll('.gallery-slide');
+    const totalSlides = slides.length;
+
+    let lightboxScrollPosition = 0;
+
+    function showSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentIndex = index;
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-image');
+        if (!lightbox || !lightboxImg) return;
+
+        lightboxScrollPosition = window.scrollY;
+
+        // Блокировка скролла (точно как в #mapModal)
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${lightboxScrollPosition}px`;
+        document.body.style.width = '100%';
+        document.body.style.touchAction = 'none';
+
+        lightboxImg.src = src;
+        lightbox.classList.add('show');
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox) return;
+
+        lightbox.classList.remove('show');
+
+        // Разблокировка скролла
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.touchAction = '';
+
+        window.scrollTo(0, lightboxScrollPosition);
+    }
+
+    function initDresscode() {
+        const prevBtn = document.getElementById('gallery-prev');
+        const nextBtn = document.getElementById('gallery-next');
+
+        // Стрелки слайдера
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+        }
+
+        // Создаём lightbox (если ещё нет)
+        let lightbox = document.getElementById('lightbox');
+        if (!lightbox) {
+            lightbox = document.createElement('div');
+            lightbox.id = 'lightbox';
+            lightbox.innerHTML = `
+                <span id="lightbox-close">×</span>
+                <img id="lightbox-image" src="" alt="">
+            `;
+            document.body.appendChild(lightbox);
+        }
+
+        const lightboxImg = document.getElementById('lightbox-image');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        // Клик по фото → открытие
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                openLightbox(img.src);
+            });
+        });
+
+        // Закрытие
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        showSlide(0);
+        console.log('✅ Слайдер + Lightbox с блокировкой скролла готовы');
+    }
+
+    // Запускаем
+    window.addEventListener('load', initDresscode);
 </script>
 </body>
 </html>
