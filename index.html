@@ -1431,17 +1431,17 @@
         .radio-group label,
         .checkbox-group label {
             display: flex;
-            align-items: center;        /* главное выравнивание */
+            align-items: center; /* главное выравнивание */
             gap: 10px;
             font-size: 1.22em;
             cursor: pointer;
             padding: 4px 0;
-            min-height: 32px;           /* стабильная высота */
+            min-height: 32px; /* стабильная высота */
         }
 
         .radio-group label input[type="radio"],
         .checkbox-group input[type="checkbox"] {
-            flex-shrink: 0;             /* не сжимается */
+            flex-shrink: 0; /* не сжимается */
             width: 26px;
             height: 26px;
             margin: 0;
@@ -1450,7 +1450,7 @@
 
         .radio-group label span,
         .checkbox-group label span {
-            line-height: 1.1;           /* текст не съезжает вниз */
+            line-height: 1.1; /* текст не съезжает вниз */
             padding-top: 1px;
         }
 
@@ -1509,6 +1509,63 @@
                 font-size: 1.3em;
             }
         }
+
+        /* ==================== ДЕТАЛИ ==================== */
+        #details {
+            padding: 80px 20px 70px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .details-container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .details-envelope {
+            width: 110px;
+            height: auto;
+            margin-bottom: 35px;
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.15));
+        }
+
+        .details-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.85em;
+            color: #2c2c2c;
+            margin-bottom: 28px;
+            letter-spacing: 3px;
+        }
+
+        .details-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.32em;
+            line-height: 1.62;
+            color: #444;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* Мобильная версия — компактно и красиво */
+        @media (max-width: 768px) {
+            #details {
+                padding: 65px 20px 55px;
+            }
+
+            .details-envelope {
+                width: 96px;
+                margin-bottom: 28px;
+            }
+
+            .details-title {
+                font-size: 2.45em;
+            }
+
+            .details-text {
+                font-size: 1.24em;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1831,33 +1888,6 @@
     </div>
 </section>
 
-<section id="details">
-    <h2>Детали & Пожелания</h2>
-    <p>1. Свои тёплые слова и пожелания приносите в сердцах, а подарки – в конверте.</p>
-    <p>2. Просим не обременять себя выбором цветов, Ваше присутствие скрасит этот день ярче любых букетов!</p>
-    <p>3. По всем вопросам Вы можете обращаться к нашему свадебному организатору.</p>
-    <p>Алеся +375447818283</p>
-    <button class="contact-btn" onclick="window.location.href='tel:+375447818283'">Связаться</button>
-</section>
-
-<!--<><section id="rsvp">-->
-<!--    <h2>Подтверждение участия</h2>-->
-<!--    <form id="rsvpForm"-->
-<!--          action="https://script.google.com/macros/s/AKfycbzYHA4Ve5GsN1Gyk64Uu-5WIQ8nbfUaANXB2tJB6Wtm6dTKpPVVZJ65pqetI80q1WngJA/exec"-->
-<!--          method="POST">-->
-<!--        <input type="text" name="Имя" placeholder="Ваше имя" required>-->
-<!--        <input type="text" name="Фамилия" placeholder="Ваша фамилия" required>-->
-<!--        <select name="Ответ" required>-->
-<!--            <option value="Приду">С радостью приду!</option>-->
-<!--            <option value="Не приду">К сожалению, не смогу</option>-->
-<!--        </select>-->
-<!--        <input type="number" name="Количество гостей" placeholder="Количество гостей" min="1">-->
-<!--        <textarea name="Комментарий" rows="4" placeholder="Ваш комментарий (по желанию)"></textarea>-->
-<!--        <button type="submit" class="submit">Отправить</button>-->
-<!--    </form>-->
-<!--    <p id="formMessage"></p>-->
-<!--</section></>-->
-
 <!-- ==================== АНКЕТА ГОСТЯ ==================== -->
 <section id="rsvp">
     <div class="rsvp-card">
@@ -1912,6 +1942,19 @@
     </div>
 </section>
 
+<!-- ==================== ДЕТАЛИ ==================== -->
+<section id="details">
+    <div class="details-container">
+        <img src="./img/details/details.png.webp" alt="Конверт" class="details-envelope">
+
+        <h2 class="details-title">ДЕТАЛИ</h2>
+
+        <p class="details-text">
+            Просим вас не дарить нам цветы — мы не успеем насладиться их красотой до отъезда.<br>
+            А вот бутылочку вина для нашей семейной винотеки будем очень рады!
+        </p>
+    </div>
+</section>
 
 <section id="countdown" style="margin-bottom: 5cm;"></section>
 
