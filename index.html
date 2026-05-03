@@ -1668,6 +1668,103 @@
                 height: 54px;
             }
         }
+
+        /* ==================== ТАЙМЕР "ЖДЕМ ВСТРЕЧИ" ==================== */
+        #countdown {
+            padding: 10px 0px 10px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .countdown-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .countdown-greeting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.1em;
+            color: #2c2c2c;
+            margin-bottom: 10px;
+            line-height: 1.05;
+        }
+
+        .countdown-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45em;
+            letter-spacing: 4px;
+            color: #555;
+            margin-bottom: 45px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 70px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            text-align: center;
+            min-width: 78px;
+        }
+
+        .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.4em;
+            font-weight: 700;
+            color: #2c2c2c;
+            line-height: 1;
+            display: block;
+        }
+
+        .label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05em;
+            color: #777;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .separator {
+            font-size: 3.6em;
+            color: #d4af77;
+            font-weight: 300;
+            margin-top: -12px;
+        }
+
+        .countdown-photo {
+            max-width: 520px;
+        }
+
+        .hands-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 8px;
+            }
+
+            .number {
+                font-size: 3.6em;
+            }
+
+            .separator {
+                font-size: 2.9em;
+                margin-top: -8px;
+            }
+
+            .countdown-greeting {
+                font-size: 2.7em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2080,31 +2177,64 @@
     </div>
 </section>
 
-<section id="countdown" style="margin-bottom: 5cm;"></section>
+<!-- ==================== ТАЙМЕР "ЖДЕМ ВСТРЕЧИ" ==================== -->
+<section id="countdown">
+    <div class="countdown-container">
+        <p class="countdown-greeting">Ждем встречи<br>с вами!</p>
+
+        <h2 class="countdown-subtitle">МЫ СКАЖЕМ «ДА» ЧЕРЕЗ</h2>
+
+        <div class="countdown-timer" id="countdown-timer">
+            <div class="time-unit">
+                <span class="number" id="days">000</span>
+                <span class="label">дней</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="hours">00</span>
+                <span class="label">часа</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="minutes">00</span>
+                <span class="label">минут</span>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <span class="number" id="seconds">00</span>
+                <span class="label">секунд</span>
+            </div>
+        </div>
+
+        <div class="countdown-photo">
+            <img src="./img/count/say_yes.png.webp" alt="Жених и невеста" class="hands-photo">
+        </div>
+    </div>
+</section>
 
 <script>
-    // Таймер
-    const countdown = document.getElementById('countdown');
-    const targetDate = new Date('2026-08-30T00:00:00');
+    // ==================== ТАЙМЕР В СТИЛЕ СКРИНШОТА ====================
+    const targetDate = new Date('2026-08-30T16:00:00');
 
     function updateCountdown() {
-        if (!countdown) return;
         const now = new Date();
         const diff = targetDate - now;
+
         if (diff <= 0) {
-            countdown.innerHTML = '<p>Сегодня наш особенный день!</p>';
+            document.getElementById('countdown-timer').innerHTML =
+                '<p style="font-size:2.2em;color:#2c2c2c;margin:30px 0;">Сегодня наш особенный день!</p>';
             return;
         }
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
-        countdown.innerHTML = `
-            <div class="time-box"><span>${days}</span>дней</div>
-            <div class="time-box"><span>${hours}</span>часов</div>
-            <div class="time-box"><span>${mins}</span>минут</div>
-            <div class="time-box"><span>${secs}</span>секунд</div>
-        `;
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('days').textContent = String(days).padStart(3, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }
 
     updateCountdown();
