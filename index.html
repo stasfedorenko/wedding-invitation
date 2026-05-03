@@ -1566,6 +1566,108 @@
             }
         }
 
+        /* ==================== КОНТАКТЫ ==================== */
+        #contacts {
+            padding: 80px 20px 70px;
+            background: #f9f7f2;
+            text-align: center;
+        }
+
+        .contacts-container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .contacts-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.85em;
+            color: #2c2c2c;
+            margin-bottom: 22px;
+            letter-spacing: 3px;
+        }
+
+        .contacts-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.32em;
+            line-height: 1.55;
+            color: #555;
+            margin-bottom: 35px;
+        }
+
+        .contacts-phone {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45em;
+            color: #444;
+            margin-bottom: 48px;
+        }
+
+        .phone-link {
+            color: #2c2c2c;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .phone-link:hover {
+            color: #d4af77;
+        }
+
+        .telegram-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .telegram-circle {
+            width: 118px;
+            height: 118px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 14px;
+            transition: all 0.4s ease;
+        }
+
+        .telegram-wrapper:hover .telegram-circle {
+            transform: scale(1.08);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+        }
+
+        .telegram-icon {
+            width: 62px;
+            height: 62px;
+        }
+
+        .telegram-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15em;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            #contacts {
+                padding: 65px 20px 55px;
+            }
+
+            .contacts-title {
+                font-size: 2.5em;
+            }
+
+            .telegram-circle {
+                width: 102px;
+                height: 102px;
+            }
+
+            .telegram-icon {
+                width: 54px;
+                height: 54px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1953,6 +2055,28 @@
             Просим вас не дарить нам цветы — мы не успеем насладиться их красотой до отъезда.<br>
             А вот бутылочку вина для нашей семейной винотеки будем очень рады!
         </p>
+    </div>
+</section>
+
+<!-- ==================== КОНТАКТЫ ==================== -->
+<section id="contacts">
+    <div class="contacts-container">
+        <h2 class="contacts-title">КОНТАКТЫ</h2>
+
+        <p class="contacts-text">
+            По всем вопросам вы можете<br>обращаться к нашему организатору.
+        </p>
+
+        <p class="contacts-phone">
+            Алеся: <a href="tel:+375447818283" class="phone-link">+375 44 781 82 83</a>
+        </p>
+
+        <a href="https://t.me/valuyevaa" target="_blank" class="telegram-wrapper">
+            <div class="telegram-circle">
+                <img src="./img/contacts/telegram_icon.png.webp" alt="Telegram" class="telegram-icon">
+            </div>
+            <span class="telegram-label">telegram</span>
+        </a>
     </div>
 </section>
 
