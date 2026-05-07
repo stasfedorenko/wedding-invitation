@@ -792,39 +792,6 @@
             }
         }
 
-        /* ==================== МОБИЛЬНАЯ АДАПТАЦИЯ ==================== */
-        @media (min-width: 768px){
-            #mapModal .modal-content {
-                width: 100%;
-                height: 100%;
-
-                margin: 0;
-                border-radius: 22px;
-            }
-
-            #mapModal .map-header {
-                padding: 30px 20px 12px;
-            }
-
-            #mapModal .map-header h3 {
-                font-size: 1.95em;
-            }
-
-            #mapModal .map-container iframe {
-                border-radius: 16px;
-            }
-
-            #mapModal .map-switch {
-                padding: 10px 20px 18px;
-                gap: 10px;
-            }
-
-            #mapModal .map-footer {
-                padding: 14px 25px 22px;
-                font-size: 1.05em;
-            }
-        }
-
         /* Остальные стили модалки */
         #mapModal .close-btn {
             position: absolute;
@@ -952,6 +919,162 @@
 
         #mapModal .map-footer a:hover {
             color: #d4af77;
+        }
+
+        /* ==================== МОБИЛЬНАЯ АДАПТАЦИЯ ==================== */
+        @media (min-width: 300px) {
+            #mapModal {
+                position: fixed;
+                inset: 0;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                background: rgba(44, 44, 44, 0.82);
+                z-index: 10000;
+            }
+
+            #mapModal.show {
+                display: flex;
+            }
+
+            #mapModal .modal-content {
+                width: 95%;
+                height: 90%;
+
+                background: #f9f7f2;
+                overflow: hidden;
+
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Остальные стили модалки */
+            #mapModal .close-btn {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
+                background: #2c2c2c;
+                color: #f9f7f2;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28px;
+                z-index: 10;
+                transition: all 0.3s ease;
+            }
+
+            #mapModal .close-btn:hover {
+                background: #d4af77;
+                color: #2c2c2c;
+                transform: rotate(90deg);
+            }
+
+            #mapModal .map-header {
+                padding: 35px 30px 15px;
+                text-align: center;
+            }
+
+            #mapModal .map-header h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 2.1em;
+                margin-bottom: 8px;
+                color: #2c2c2c;
+                letter-spacing: 1px;
+            }
+
+            #mapModal .map-header p {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.35em;
+                color: #555;
+                margin: 0;
+            }
+
+            #mapModal .map-switch {
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                padding: 10px 30px 20px;
+            }
+
+            #mapModal .map-btn {
+                padding: 12px 32px;
+                font-family: 'Playfair Display', serif;
+                font-size: 1.1em;
+                border-radius: 30px;
+                border: 2px solid #d4af77;
+                background: #fff;
+                color: #2c2c2c;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            #mapModal .map-btn.active,
+            #mapModal .map-btn:hover {
+                background: #d4af77;
+                color: #2c2c2c;
+            }
+
+            #mapModal .map-container {
+                flex: 1; /* ← занимает всё доступное место */
+                padding: 0 15px 15px;
+            }
+
+            #mapModal .map-container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* ==================== КНОПКИ В ФУТЕРЕ МОДАЛКИ ==================== */
+            .map-footer {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                justify-content: center;
+                padding: 28px 30px 32px;
+                background: #f9f7f2;
+            }
+
+            .map-link-btn {
+                flex: 1;
+                min-width: 225px;
+                padding: 16px 34px;
+                text-align: center;
+                font-family: 'Playfair Display', serif;
+                font-size: 1.1em;
+                font-weight: 600;
+                letter-spacing: 1px;
+                color: #2c2c2c;
+                background: #f5f1e8;
+                border: 2.5px solid #d4af77;
+                border-radius: 50px;
+                text-decoration: none;
+                transition: all 0.35s ease;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .map-link-btn:hover {
+                background: #d4af77;
+                color: #2c2c2c;
+                transform: translateY(-3px);
+                box-shadow: 0 12px 25px rgba(212, 175, 119, 0.4);
+            }
+
+            #mapModal .map-footer a {
+                color: #555;
+                text-decoration: none;
+                font-family: 'Playfair Display', serif;
+                transition: color 0.3s ease;
+            }
+
+            #mapModal .map-footer a:hover {
+                color: #d4af77;
+            }
         }
 
         /* ==================== DRESS CODE — СТИЛЬ TILDA ==================== */
@@ -1190,7 +1313,7 @@
         }
 
         /* Мобильная версия — максимально жёстко */
-        @media (min-width: 768px){
+        @media (min-width: 768px) {
             #lightbox {
                 max-height: 100%;
                 max-width: 100%;
