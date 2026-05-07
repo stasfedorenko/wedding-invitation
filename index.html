@@ -791,7 +791,7 @@
         }
 
         /* ==================== МОБИЛЬНАЯ АДАПТАЦИЯ ==================== */
-        @media {
+        @media (min-width: 768px){
             #mapModal .modal-content {
                 width: 95%;
                 height: 70%;
@@ -1188,7 +1188,7 @@
         }
 
         /* Мобильная версия — максимально жёстко */
-        @media {
+        @media (min-width: 768px){
             #lightbox {
                 max-height: 100%;
                 max-width: 100%;
@@ -2130,6 +2130,11 @@
             .countdown-greeting {
                 font-size: 2.7em;
             }
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
         }
     </style>
 </head>
