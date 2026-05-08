@@ -1086,7 +1086,7 @@
         .dresscode-container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px 0;
+            padding: 10px 20px 0;
             text-align: center;
         }
 
@@ -1698,27 +1698,27 @@
 
         /* ==================== ПРОГРАММА ДНЯ ==================== */
         #schedule {
-            padding: 30px 20px 30px;
             background: #f9f7f2;
             text-align: center;
+            padding: 30px 0 0 ;
         }
 
         .program-wrapper {
-            max-width: 1020px;
-            margin: 0 auto;
+            padding: 10px 0 10px;
+            max-width: 100%;
         }
 
         .program-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.9em;
-            margin-bottom: 10px;
             color: #2c2c2c;
         }
 
         .timeline-container {
             position: relative;
-            margin-top: -100px;
+            margin-top: -50px;
             overflow: hidden;
+            height: 1020px;
         }
 
         #timeline-svg {
@@ -1800,17 +1800,23 @@
         /* ==================== АДАПТИВ ДЛЯ МОБИЛКИ ==================== */
         @media (max-width: 768px) {
             #schedule {
-                padding: 10px 0 10px; /* уменьшили отступы */
+                padding: 30px 0 0 ;
             }
 
             .program-wrapper {
                 max-width: 100%;
-                padding: 0 0;
+                padding: 10px 0 0;
             }
 
             .program-title {
                 font-size: 2.4em;
-                margin-bottom: 35px;
+            }
+
+            .timeline-container {
+                position: relative;
+                margin-top: -80px;
+                overflow: hidden;
+                height: 720px;
             }
 
             #timeline-svg {
@@ -1899,6 +1905,12 @@
             font-size: 1.18em;
             margin-bottom: 9px;
             color: #333;
+            font-weight: 700;
+        }
+
+        .checkbox-group label,
+        .radio-group label {
+            font-weight: 400;
         }
 
         .form-group input,
@@ -2082,7 +2094,7 @@
         }
 
         /* ==================== МОБИЛЬНАЯ ВЕРСИЯ — ЕЩЁ КОМПАКТНЕЕ ==================== */
-        @media (max-width: 300px) {
+        @media (max-width: 468px) {
             .rsvp-card {
                 padding: 38px 25px 30px;
             }
@@ -2736,10 +2748,11 @@
 
             <div class="gallery-slider" id="gallery-slider">
                 <div class="gallery-slides" id="gallery-slides">
-                    <img src="./img/dresscode/outfit1.png" alt="Образ 1" class="gallery-slide gallery-img">
+                    <img src="img/dresscode/outfit1.png" alt="Образ 1" class="gallery-slide gallery-img">
                     <img src="./img/dresscode/outfit2.png" alt="Образ 2" class="gallery-slide gallery-img">
                     <img src="./img/dresscode/outfit3.png" alt="Образ 3" class="gallery-slide gallery-img">
-                    <img src="./img/dresscode/outfit4.png" alt="Образ 4" class="gallery-slide gallery-img">
+                    <img src="img/dresscode/outfit4.png" alt="Образ 4" class="gallery-slide gallery-img">
+                    <img src="img/dresscode/outfit5.png" alt="Образ 5" class="gallery-slide gallery-img">
                 </div>
             </div>
 
