@@ -1546,55 +1546,55 @@
             position: relative;
         }
 
-        /* ==================== КОЛЬЦО С ПЛАВНЫМ ВРАЩЕНИЕМ ==================== */
+        /* ==================== КОЛЬЦО ==================== */
         .ring {
             position: absolute;
             top: 50%;
             left: 50%;
+
             width: 75px;
             height: 75px;
-            transform: translate(-50%, -450%) scale(8) rotate(-720deg);
+
+            transform: translate(-50%, -300%);
             opacity: 0;
+
             z-index: 2;
             pointer-events: none;
-            filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.35));
+
+            will-change: transform, opacity;
+
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
         }
 
+        /* запуск */
         #special-date.animate .ring {
-            animation: ringUltraSmoothDrop 3.4s cubic-bezier(1, 1, 1, 1) forwards;
+            animation: ringDrop 2.4s ease-out forwards;
         }
 
-        @keyframes ringUltraSmoothDrop {
+        /* ==================== ПЛАВНОЕ ПАДЕНИЕ ==================== */
+        @keyframes ringDrop {
+
             0% {
-                transform: translate(-50%, -650%) scale(9.8) rotate(-720deg);
+                transform: translate3d(-50%, -300%, 0);
                 opacity: 0;
             }
+
             15% {
-                transform: translate(-50%, -480%) scale(6.5) rotate(-540deg);
-                opacity: 0.3;
-            }
-            30% {
-                transform: translate(-50%, -320%) scale(3.8) rotate(-360deg);
-                opacity: 0.85;
-            }
-            45% {
-                transform: translate(-50%, -190%) scale(2.3) rotate(-180deg);
                 opacity: 1;
             }
-            60% {
-                transform: translate(-50%, -105%) scale(1.45) rotate(-90deg);
+
+            70% {
+                transform: translate3d(-50%, -75%, 0);
+                opacity: 1;
             }
-            73% {
-                transform: translate(-50%, -68%) scale(1.12) rotate(-35deg);
+
+            85% {
+                transform: translate3d(-50%, -55%, 0);
             }
-            82% {
-                transform: translate(-50%, -65%) scale(1.04) rotate(-22deg);
-            }
-            91% {
-                transform: translate(-50%, -62%) scale(1.01) rotate(-20deg);
-            }
+
             100% {
-                transform: translate(-50%, -60%) scale(1) rotate(-19deg); /* финальный лёгкий наклон */
+                transform: translate3d(-50%, -60%, 0);
                 opacity: 1;
             }
         }
@@ -1700,7 +1700,7 @@
         #schedule {
             background: #f9f7f2;
             text-align: center;
-            padding: 30px 0 0 ;
+            padding: 30px 0 0;
         }
 
         .program-wrapper {
@@ -1800,7 +1800,7 @@
         /* ==================== АДАПТИВ ДЛЯ МОБИЛКИ ==================== */
         @media (max-width: 768px) {
             #schedule {
-                padding: 30px 0 0 ;
+                padding: 30px 0 0;
             }
 
             .program-wrapper {
@@ -3133,7 +3133,7 @@
             });
         }, {
             threshold: 0.85,           // можно менять от 0.7 до 0.95
-            rootMargin: "0px 0px -50px 0px"
+            rootMargin: "0px 0px 0px 0px"
         });
 
         observer.observe(specialDate);
