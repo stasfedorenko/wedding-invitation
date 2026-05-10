@@ -1500,7 +1500,6 @@
         }
 
         .month {
-            font-family: 'Great Vibes', cursive;
             font-size: 3.6em;
             margin-bottom: 40px;
             color: #2c2c2c;
@@ -1797,6 +1796,11 @@
             right: 10%;
         }
 
+        .event-5 {
+            top: 35%;
+            left: 8%;
+        }
+
         /* ==================== АДАПТИВ ДЛЯ МОБИЛКИ ==================== */
         @media (max-width: 768px) {
             #schedule {
@@ -1810,6 +1814,7 @@
 
             .program-title {
                 font-size: 2.4em;
+                padding: 30px 0 50px;
             }
 
             .timeline-container {
@@ -1830,7 +1835,7 @@
 
             /* Позиции событий на телефоне */
             .event-1 {
-                top: 10%;
+                top: 7%;
                 left: 8%;
             }
 
@@ -1840,13 +1845,18 @@
             }
 
             .event-3 {
-                top: 50%;
+                top: 45%;
                 left: 8%;
             }
 
             .event-4 {
                 top: 70%;
                 right: 3%;
+            }
+
+            .event-5 {
+                top: 82%;
+                left: 8%;
             }
 
             .event-icon img {
@@ -2442,7 +2452,7 @@
             <span class="plus-sign">+</span>
             <span class="name-right">Виктория</span>
         </div>
-        <h2>30.08.26</h2>
+        <h2>30.08.2026</h2>
     </header>
 
     <div class="memory-decorative-container">
@@ -2680,27 +2690,33 @@
 
             <!-- События (только классы, без inline-стилей) -->
             <div class="event-item event-1">
-                <div class="event-icon"><img src="./img/program_day/banket.png.webp" alt=""></div>
-                <div class="event-time">16:00</div>
-                <div class="event-text">Сбор гостей</div>
+                <div class="event-icon"><img src="./img/program_day/check_in_of_guests.png" alt=""></div>
+                <div class="event-time">15:00</div>
+                <div class="event-text">Заселение гостей</div>
             </div>
 
             <div class="event-item event-2">
-                <div class="event-icon"><img src="./img/program_day/we.png.webp" alt=""></div>
-                <div class="event-time">16:30</div>
-                <div class="event-text">Торжественная церемония</div>
+                <div class="event-icon"><img src="./img/program_day/banket.png.webp" alt=""></div>
+                <div class="event-time">15:30</div>
+                <div class="event-text">Фуршет</div>
             </div>
 
             <div class="event-item event-3">
-                <div class="event-icon"><img src="./img/program_day/table.png.webp" alt=""></div>
-                <div class="event-time">17:00</div>
-                <div class="event-text">Начало банкета</div>
+                <div class="event-icon"><img src="./img/program_day/we.png.webp" alt=""></div>
+                <div class="event-time">16:20</div>
+                <div class="event-text">Торжественная церемония</div>
             </div>
 
             <div class="event-item event-4">
-                <div class="event-icon"><img src="./img/program_day/to_home.png.webp" alt=""></div>
+                <div class="event-icon"><img src="./img/program_day/table.png.webp" alt=""></div>
+                <div class="event-time">17:30</div>
+                <div class="event-text">Праздничный ужин</div>
+            </div>
+
+            <div class="event-item event-5">
+                <div class="event-icon"><img src="./img/program_day/after_party.png" alt=""></div>
                 <div class="event-time">23:00</div>
-                <div class="event-text">Завершение вечера</div>
+                <div class="event-text">After Party</div>
             </div>
         </div>
     </div>
@@ -2735,10 +2751,6 @@
                 <img src="./img/dresscode/colors/color5.png" alt="Молочный" class="color-circle">
                 <span>Молочный</span>
             </div>
-            <div class="color-item">
-                <img src="./img/dresscode/colors/color6.png" alt="Серый" class="color-circle">
-                <span>Серый</span>
-            </div>
         </div>
 
         <!-- Галерея фото (с листанием и открытием в модалке) -->
@@ -2767,7 +2779,7 @@
 <section id="rsvp">
     <div class="rsvp-card">
         <h2 class="rsvp-title">АНКЕТА ГОСТЯ</h2>
-        <p class="rsvp-subtitle">ПОЖАЛУЙСТА, ПОДТВЕРДИТЕ СВОЕ ПРИСУТСТВИЕ</p>
+        <p class="rsvp-subtitle">ПОЖАЛУЙСТА, ПОДТВЕРДИТЕ СВОЕ ПРИСУТСТВИЕ НЕ ПОЗДНЕЕ <strong>10</strong> АВГУСТА</p>
 
         <form id="rsvpForm"
               action="https://script.google.com/macros/s/AKfycbwpqTpOB5BvLq06TjdUd7dkyzScUQ94OKxld4zFuKSivDKOGPm_HxkRafxYHUWJDHMW9w/exec"
@@ -2811,6 +2823,21 @@
             <div class="form-group">
                 <label>Есть ли у вас аллергии?</label>
                 <input type="text" name="Аллергии" placeholder="Укажите, если есть">
+            </div>
+
+            <!-- Трансфер -->
+            <div class="form-group">
+                <label>Нужен ли Вам трансфер из Минска до места проведения мероприятия?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="Трансфер" value="Да" required>
+                        <span>Да, нужен</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="Трансфер" value="Нет">
+                        <span>Нет, не нужен</span>
+                    </label>
+                </div>
             </div>
 
             <!-- Комментарий -->
@@ -3150,7 +3177,7 @@
         const cx = 273;
         const cy = 117.5;
 
-        const triggerPoints = [0.90, 0.72, 0.52, 0.28];   // подвинул под новый диапазон
+        const triggerPoints = [0.90, 0.72, 0.52, 0.28, 0.2];   // подвинул под новый диапазон
 
         // === НАСТРОЙКИ ДИАПАЗОНА ДВИЖЕНИЯ СЕРДЦА ===
         const minProgress = 0.0257;   // насколько отступить от начала линии
